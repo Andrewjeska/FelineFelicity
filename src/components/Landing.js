@@ -13,6 +13,7 @@ import Dropzone from 'react-dropzone';
 class Intro extends React.Component {
 
     render() {
+
         return (
             <div className="box1">
                 <div className="intro">
@@ -22,15 +23,23 @@ class Intro extends React.Component {
                         </Fade>
 
                         <Fade duration={this.props.subtitleDuration}>
-                            <p className="subtitle"> A new way to find your next furry companion </p>
+                            <p className="subtitle"> A modern way for finding your next furry companion </p>
                         </Fade>
+
+
 
                         <Fade duration={this.props.buttonDuration}>
-                            <Button waves='light'>Let's get started</Button>
-                        </Fade>
 
-                        <div className="cat">
-                        </div>
+                            <div className="nextBox-container">
+                                <Icon className="nextBox">arrow_downward</Icon>
+
+                            </div>
+                        </Fade>
+                        <div className="cat"></div>
+
+                        {/*} <Fade duration={this.props.catDuration}>
+
+                        </Fade> */}
 
                 </div>
             </div>
@@ -79,6 +88,7 @@ class Upload extends React.Component {
 }
 
 class ImageSelection extends React.Component {
+    //must scroll down after successful upload or pressing a button/pressing enter after writing url
     render() {
 
       const header = {
@@ -101,27 +111,34 @@ class ImageSelection extends React.Component {
 
           <Row >
             <h2 style={header}> First, we need a cat </h2>
-            <p style={center}> Upload an image locally or copy and paste a URL </p>
+            <p style={center}> Upload an image or copy and paste a URL </p>
           </Row>
+          <div className="box2">
+              <Row >
+                <Col className="m2 l2">
+                </Col>
 
-          <Row className="box2">
-            <Col className="m2 l2">
-            </Col>
+                <Col className="m3 l3">
+                    <Upload />
+                </Col>
 
-            <Col className="m3 l3">
-                <Upload />
-            </Col>
+                <Col className="m2 l2" style={big_OR_col}>
+                    <div className="big-OR"> OR </div>
 
-            <Col className="m2 l2" style={big_OR_col}>
-                <div className="big-OR"> OR </div>
-            </Col>
+                    <div className="nextBox2-container">
+                        <Icon className="nextBox2">arrow_downward</Icon>
 
-            <Col className="m5 l5 urldrop">
-                {/* url drop */}
-                <Input  s={8} label="Image URL" />
-            </Col>
+                    </div>
+                </Col>
 
-          </Row>
+                <Col className="m5 l5 urldrop">
+                    {/* url drop */}
+                    <Input  s={8} label="Image URL" />
+                </Col>
+
+              </Row>
+
+          </div>
         </div>
 
       );
@@ -129,13 +146,68 @@ class ImageSelection extends React.Component {
 
 }
 
+class SubmitImage extends React.Component {
+    render() {
+        const header = {
+            'paddingTop': '4%',
+            'textAlign': 'center',
+            'color': 'white'
+        };
+
+        const center = {
+            'textAlign': 'center',
+            'color': 'white'
+        };
+
+
+      return (
+        <div className="box3">
+            <Row >
+              <h2 style={header}> Where should we look? </h2>
+              <p style={center}> Enter your Postal Code then click on "Find Cats" to begin your search </p>
+            </Row>
+
+            <Row >
+                <Col className="m4 l4"> </Col>
+
+                <Col className="m4 l4 ">
+                    <div className="zip">
+                        <Input  s={10} label="Postal Code" />
+                    </div>
+                </Col>
+
+                <Col className="m4 l4"> </Col>
+
+            </Row>
+
+            <Row >
+                <Col className="m4 l4"> </Col>
+
+                <Col className="m4 l4 ">
+                    <div>
+                        <Button waves='light'>Find Cats</Button>
+                    </div>
+                </Col>
+
+                <Col className="m4 l4"> </Col>
+
+            </Row>
+
+        </div>
+
+      );
+    }
+}
+
 
 class Landing extends React.Component {
   render() {
+
     return (
       <div>
-        <Intro titleDuration={1} subtitleDuration={2.5} buttonDuration={4.5} />
+        <Intro titleDuration={1} subtitleDuration={2.5} buttonDuration={6} />
         <ImageSelection />
+        <SubmitImage />
       </div>
 
     );

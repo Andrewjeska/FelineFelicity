@@ -1,25 +1,3 @@
-/* Base Application Styles */
-/*body {
-  color: #fff;
-  background: #222;
-}
-
-.index img {
-  margin: 40px auto;
-  border-radius: 4px;
-  background: #fff;
-  display: block;
-}
-
-.index .notice {
-  margin: 20px auto;
-  padding: 15px 0;
-  text-align: center;
-  border: 1px solid #000;
-  border-width: 1px 0;
-  background: #666;
-}*/
-
 html,
 body {
   margin: 0;
@@ -41,7 +19,7 @@ body {
 
 
 
-    background-color: #099942;
+    background-color: #4f95ff;
   /* some kind of image */
 
 }
@@ -58,11 +36,62 @@ body {
   /* some kind of image */
 }
 
+.box3 {
+    height: 100%;
+    text-align: center;
+    /*background-color: #42f492;*/
+    background-color: #4f95ff;
+    padding-bottom: 25%;
+}
+
+.nextBox-container {
+    margin-top: 10%;
+    position: absolute;;
+    text-align: center;
+    left:46.6%;
+}
+
+.nextBox {
+    border-radius: 75%;
+    position: relative;
+    font-size: 80px;
+    color: gray;
+    border: 2px solid gray;
+    text-align: center;
+    z-index:1;
+}
+
+.nextBox:hover {
+    color: white;
+    border: 2px solid white;
+}
+
+.nextBox2-container {
+    margin-top: 10%;
+    position: absolute;
+    text-align: center;
+    left:46.2%;
+}
+
+
+.nextBox2 {
+    border-radius: 75%;
+    font-size: 80px;
+    color: gray;
+    border: 2px solid gray;
+    text-align: center;
+}
+
+.nextBox2:hover {
+    color: #4f95ff;
+    border: 2px solid #4f95ff;
+}
+
 .intro {
     position: relative;
     text-align: center;
     vertical-align: middle;
-    margin-top: 20.7%;
+    margin-top: 20%;
     margin-bottom: 22%;
     /*flex: 1;
     align-self: stretch;*/
@@ -131,22 +160,37 @@ body {
 }
 
 .big-OR {
-
     border-radius: 50%;
-
-
     width: 70px;
     height: 70px;
     padding: 15px;
-
     padding-left: 9px;
-
     background: #fff;
     border: 2px solid #000;
     color: #000;
     text-align: center;
-
     font: 32px Arial, sans-serif;
 
+}
+
+.zip {
+    padding-left: 20% !important;
+}
+
+.zip label{
+    color: white;
+}
+
+.zip input {
+    border-bottom: 1px solid white;
+}
+
+.zip input[type=text]:focus+label{
+    color: black !important;
+}
+
+
+input[type=text]:focus {
+    border-bottom: 1px solid black !important;
 
 }
