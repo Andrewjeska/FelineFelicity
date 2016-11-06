@@ -1,0 +1,152 @@
+/* Base Application Styles */
+/*body {
+  color: #fff;
+  background: #222;
+}
+
+.index img {
+  margin: 40px auto;
+  border-radius: 4px;
+  background: #fff;
+  display: block;
+}
+
+.index .notice {
+  margin: 20px auto;
+  padding: 15px 0;
+  text-align: center;
+  border: 1px solid #000;
+  border-width: 1px 0;
+  background: #666;
+}*/
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+}
+
+
+.box1 {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+
+    height: 100%;
+
+
+
+    background-color: #099942;
+  /* some kind of image */
+
+}
+
+
+.box2 {
+    padding-top: 5%;
+    padding-bottom: 10%;
+
+    height: 100%;
+
+    /*background-color: #20b2db;*/
+
+  /* some kind of image */
+}
+
+.intro {
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 20.7%;
+    margin-bottom: 22%;
+    /*flex: 1;
+    align-self: stretch;*/
+
+
+}
+
+.title {
+    text-align: inherit;
+    vertical-align: inherit;
+    color: white;
+    /*opacity: 0;*/
+}
+
+.subtitle {
+    text-align: inherit;
+    vertical-align: inherit;
+    color: white;
+    /*opacity: 0;*/
+
+}
+
+.image-select {
+    /*flex: 1;
+    align-self: stretch;*/
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.uploadBox {
+    border-width: 2px;
+    border-style: dashed;
+    border-color: #008B8B;
+    background: #fafafa;
+    border-image: initial;
+    border-radius: 5px;
+    margin-top: 5% !important;
+    height: 250px !important;
+    width: 250px !important;
+
+
+}
+
+.upload-arrow {
+    font-size:80px;
+    margin-top:35%;
+    margin-left:35%;
+
+}
+
+.thumbnail {
+    height:100px;
+    width:100px;
+    overflow: hidden;
+
+}
+
+.thumbnail img {
+
+
+}
+
+.urldrop {
+    padding-top: 6% !important;
+}
+
+.big-OR {
+
+    border-radius: 50%;
+
+
+    width: 70px;
+    height: 70px;
+    padding: 15px;
+
+    padding-left: 9px;
+
+    background: #fff;
+    border: 2px solid #000;
+    color: #000;
+    text-align: center;
+
+    font: 32px Arial, sans-serif;
+
+
+}
