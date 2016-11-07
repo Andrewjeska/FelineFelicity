@@ -9,6 +9,13 @@ import { Button, Card, Row, Col, Icon, Input } from 'react-materialize';
 //import Delay from 'react-delay';
 import Fade from 'react-fade';
 import Dropzone from 'react-dropzone';
+import Scroll from 'react-scroll';
+
+var Link       = Scroll.Link;
+var Element    = Scroll.Element;
+var Events     = Scroll.Events;
+var scroll     = Scroll.animateScroll;
+var scrollSpy  = Scroll.scrollSpy;
 
 class Intro extends React.Component {
 
@@ -26,12 +33,13 @@ class Intro extends React.Component {
                             <p className="subtitle"> A modern way for finding your next furry companion </p>
                         </Fade>
 
-
-
                         <Fade duration={this.props.buttonDuration}>
 
                             <div className="nextBox-container">
-                                <Icon className="nextBox">arrow_downward</Icon>
+
+                                <Link to="image-select" smooth={true} duration={500} spy={true}>
+                                    <Icon className="nextBox">arrow_downward</Icon>
+                                </Link>
 
                             </div>
                         </Fade>
@@ -92,7 +100,7 @@ class ImageSelection extends React.Component {
     render() {
 
       const header = {
-          'paddingTop': '4%',
+
           'textAlign': 'center'
       };
 
@@ -106,15 +114,15 @@ class ImageSelection extends React.Component {
 
       };
 
+
       return (
         <div >
-
-          <Row >
-            <h2 style={header}> First, we need a cat </h2>
-            <p style={center}> Upload an image or copy and paste a URL </p>
-          </Row>
           <div className="box2">
               <Row >
+                <h2 style={header}> First, we need a cat </h2>
+                <p style={center}> Upload an image or copy and paste a URL </p>
+              </Row>
+              <Row className="image-select">
                 <Col className="m2 l2">
                 </Col>
 
@@ -125,10 +133,6 @@ class ImageSelection extends React.Component {
                 <Col className="m2 l2" style={big_OR_col}>
                     <div className="big-OR"> OR </div>
 
-                    <div className="nextBox2-container">
-                        <Icon className="nextBox2">arrow_downward</Icon>
-
-                    </div>
                 </Col>
 
                 <Col className="m5 l5 urldrop">
@@ -137,6 +141,12 @@ class ImageSelection extends React.Component {
                 </Col>
 
               </Row>
+              <Link to="image-submit" smooth={true} duration={500} spy={true}>
+                  <div className="nextBox2-container">
+                      <Icon className="nextBox2">arrow_downward</Icon>
+
+                  </div>
+              </Link>
 
           </div>
         </div>
@@ -201,17 +211,46 @@ class SubmitImage extends React.Component {
 
 
 class Landing extends React.Component {
-  render() {
+    componentDidMount() {
 
-    return (
-      <div>
-        <Intro titleDuration={1} subtitleDuration={2.5} buttonDuration={6} />
-        <ImageSelection />
-        <SubmitImage />
-      </div>
+      Events.scrollEvent.register('begin', function(to, element) {
+        console.log("begin", arguments);
+      });
 
-    );
-  }
+      Events.scrollEvent.register('end', function(to, element) {
+        console.log("end", arguments);
+      });
+
+      scrollSpy.update();
+
+    }
+
+    componentWillUnmount() {
+      Events.scrollEvent.remove('begin');
+      Events.scrollEvent.remove('end');
+    }
+
+      render() {
+
+        return (
+          <div>
+
+                <Intro titleDuration={1} subtitleDuration={2.5} buttonDuration={6} />
+                <Element name="image-select" className="element">
+                    <ImageSelection />
+                </Element>
+
+
+                <Element name="image-submit" className="element">
+                    <SubmitImage />
+                </Element>
+
+
+
+          </div>
+
+        );
+      }
 }
 
 Landing.defaultProps = {

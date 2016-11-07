@@ -68,6 +68,7 @@
     "react-delay": "0.0.3",
     "react-dom": "^15.0.0",
     "react-dropzone": "^2.2.4",
+    "react-scroll": "^1.4.4",
     "sass-loader": "^4.0.2"
   }
 }
