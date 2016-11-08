@@ -21,7 +21,7 @@ var scrollSpy  = Scroll.scrollSpy;
 var UploadStore = require('../stores/UploadStore');
 
 //actions
-var UploadActions = require('..actions/UploadActions');
+var UploadActions = require('../actions/UploadActions');
 
 class Intro extends React.Component {
     //needs a fancy fadein navbar. Should be have About For Shelters and on the right, log in.
@@ -86,8 +86,10 @@ class About extends React.Component {
 }
 
 class Upload extends React.Component {
-    getInitialState() {
-        return UploadStore.getState();
+    constructor() {
+        super();
+        this.state = {file: {}};
+        this.onChange = this.onChange.bind(this)
     }
 
     componentDidMount() {
@@ -100,6 +102,8 @@ class Upload extends React.Component {
 
     onChange(state) {
       this.setState(state);
+      console.log(state);
+
     }
 
 
@@ -110,7 +114,9 @@ class Upload extends React.Component {
                 <Dropzone className="uploadBox" onDrop= {
                         (acceptedFile) => {
                             //call action
-                            UploadActions.uploadImage(file);
+                            UploadActions.uploadImage(acceptedFile);
+                            //console.log(state);
+
                         }
                     }>
 
@@ -253,11 +259,11 @@ class Landing extends React.Component {
     componentDidMount() {
 
       Events.scrollEvent.register('begin', function(to, element) {
-        console.log("begin", arguments);
+        console.log('begin', arguments);
       });
 
       Events.scrollEvent.register('end', function(to, element) {
-        console.log("end", arguments);
+        console.log('end', arguments);
       });
 
       scrollSpy.update();

@@ -1,18 +1,20 @@
 var alt = require('../alt');
-var UploadActions = require('../actions/uploadActions');
+var UploadActions = require('../actions/UploadActions');
+
 
 class UploadStore {
   constructor() {
     this.file = [];
 
     this.bindListeners({
-      handleUploadedFile: UploadActions.NEW_UPLOAD
+      handleUploadedFile: UploadActions.UPDATE_UPLOAD_BOX
     });
   }
 
   handleUploadedFile(file) {
+    //console.log(file)
     this.file = file;
   }
 }
 
-module.exports = alt.createStore(LocationStore, 'LocationStore');
+module.exports = alt.createStore(UploadStore, 'UploadStore');
