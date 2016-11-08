@@ -1,20 +1,14 @@
 'use strict';
-//const http = require('http');
+
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-//import createEngine from 'express-react-views';
-//const createEngine = require('express-react-views').createEngine;
-//const initializeDb = require('./db')
-//const middleware = require('./middleware');
-//const api = require('./api');
 const multer = require('multer');
 const config = require('./config.json');
-//import reload from 'reload'
-
+const getDetections = require('./image_analysis/cat_attr').getDetections;
+const parseVisionData = require('./image_analysis/cat_attr').parseVisionData;
 
 var app = express();
-//var server = http.createServer(app);
 
 // 3rd party middleware
 app.use(cors())
@@ -26,36 +20,40 @@ app.use(bodyParser.json({
 var storage = multer.memoryStorage()
 var upload = multer({ storage: storage })
 
-
-var temp = {};
-
-
-//import Promise from 'bluebird';
+//var temp = {};
 
 
-
-//app.use(express.static(__dirname + '/public'));
-
-//app.set('views', __dirname + '/views');
-//app.set('view engine', 'jsx');
-//app.engine('jsx', createEngine());
-
-
-//reload(server, app, true);
-
-	// internal middleware
-//app.use(middleware(config));
-
-// api router
-//app.use('/api', api(config));
 app.get('/api/test', (req, res)=> {
 	res.send("Api call complete!")
 });
 
 app.post('/api/upload', upload.single('file'), (req, res) => {
-	temp = req.file.buffer;
-	res.send({'file':'called'})
+	//temp = req.file.buffer;
+	console.log(req.file);
+	handleUpload(req, res);
+	//at scale : will just upload to aws lambda function
+
 });
+
+function handleUpload(req, res) {
+	getDetections(req.file.buffer)
+		.then( (detections) => {
+
+			if(detections[0] !== 'cat') {
+				res.send({'isCat' : false});
+
+			} else {
+				parseVisionData(detections)
+					.then( (params) => {
+						//res.send(response from petfinder api), append isCat
+						res.send({'isCat' : true})
+					});
+			}
+		})
+
+	//res.send({'error':'functions did not run'})
+
+}
 
 
 //starting app
