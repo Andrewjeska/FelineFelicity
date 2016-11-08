@@ -25,11 +25,13 @@ body {
 }
 
 
+
 .box2 {
 
-    padding-bottom: 9%;
+
 
     height: 100%;
+    padding-top: .5%;
 
     /*background-color: #20b2db;*/
 
@@ -41,14 +43,14 @@ body {
     text-align: center;
     /*background-color: #42f492;*/
     background-color: #4f95ff;
-    padding-bottom: 30%;
+    padding-bottom: 28.2%;
 }
 
 .nextBox-container {
     margin-top: 15%;
     position: absolute;;
     text-align: center;
-    left:46.6%;
+    left:46.25%;
 }
 
 .nextBox {
@@ -70,7 +72,10 @@ body {
 
     position: absolute;
     text-align: center;
-    left:46.2%;
+    left:46.25%;
+    padding-top: 30%;
+
+
 }
 
 
@@ -91,8 +96,8 @@ body {
     position: relative;
     text-align: center;
     vertical-align: middle;
-    margin-top: 20%;
-    margin-bottom: 25.2%;
+    margin-top: 16%;
+    margin-bottom: 25.25%;
     /*flex: 1;
     align-self: stretch;*/
 
@@ -115,8 +120,9 @@ body {
 }
 
 .image-select {
-    padding-top: 6%;
-    padding-bottom: 6%;
+    padding-bottom: 18.15%;
+
+
 
 }
 
@@ -128,6 +134,7 @@ body {
     border-image: initial;
     border-radius: 5px;
     margin-top: 5% !important;
+    margin-right: 1% !important;
     height: 250px !important;
     width: 250px !important;
 

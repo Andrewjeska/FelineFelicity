@@ -5,78 +5,116 @@ require('styles/Landing.css');
 require('styles/cat_animation.scss');
 
 import React from 'react';
-import { Button, Card, Row, Col, Icon, Input } from 'react-materialize';
-//import Delay from 'react-delay';
+import { Button, Card, Row, Col, Icon, Input, Navbar, NavItem, Dropdown } from 'react-materialize';
+
 import Fade from 'react-fade';
 import Dropzone from 'react-dropzone';
 import Scroll from 'react-scroll';
 
+
 var Link       = Scroll.Link;
 var Element    = Scroll.Element;
 var Events     = Scroll.Events;
-var scroll     = Scroll.animateScroll;
 var scrollSpy  = Scroll.scrollSpy;
 
-class Intro extends React.Component {
+//stores
+var UploadStore = require('../stores/UploadStore');
 
+//actions
+var UploadActions = require('..actions/UploadActions');
+
+class Intro extends React.Component {
+    //needs a fancy fadein navbar. Should be have About For Shelters and on the right, log in.
     render() {
 
         return (
-            <div className="box1">
-                <div className="intro">
+            <div>
+                <Navbar left>
+                  <NavItem href='about.html'>About</NavItem>
+                  <NavItem href='forShelters.html'>For Shelters</NavItem>
 
-                        <Fade duration={this.props.titleDuration}>
-                            <h1 className="title"> FelineFelicity </h1>
-                        </Fade>
+                  <Dropdown trigger={
+                    <span>Account</span>
+                  }>
+                  <NavItem>Pets</NavItem>
+                  <NavItem>Forms</NavItem>
+                  <NavItem divider />
+                  <NavItem>Settings</NavItem>
+                </Dropdown>
 
-                        <Fade duration={this.props.subtitleDuration}>
-                            <p className="subtitle"> A modern way for finding your next furry companion </p>
-                        </Fade>
+                </Navbar>
 
-                        <Fade duration={this.props.buttonDuration}>
+                <div className="box1">
+                    <div className="intro">
 
-                            <div className="nextBox-container">
+                            <Fade duration={this.props.titleDuration}>
+                                <h1 className="title"> Petly </h1>
+                            </Fade>
 
-                                <Link to="image-select" smooth={true} duration={500} spy={true}>
-                                    <Icon className="nextBox">arrow_downward</Icon>
-                                </Link>
+                            <Fade duration={this.props.subtitleDuration}>
+                                <p className="subtitle"> Welcome to Petly. A platform for finding pets that are up for adoption
+                                 in your area.
+                                </p>
+                            </Fade>
 
-                            </div>
-                        </Fade>
-                        <div className="cat"></div>
+                            <Fade duration={this.props.buttonDuration}>
 
-                        {/*} <Fade duration={this.props.catDuration}>
+                                <div className="nextBox-container">
 
-                        </Fade> */}
+                                    <Link to="image-select" smooth={true} duration={500} spy={true}>
+                                        <Icon className="nextBox">arrow_downward</Icon>
+                                    </Link>
 
+                                </div>
+                            </Fade>
+
+                            <div className="cat"></div>
+
+                            {/*} <Fade duration={this.props.catDuration}>
+
+                            </Fade> */}
+
+                    </div>
                 </div>
             </div>
         );
     }
 }
 
+class About extends React.Component {
+
+}
+
 class Upload extends React.Component {
-    constructor() {
-        super();
-        this.state = {file: []};
+    getInitialState() {
+        return UploadStore.getState();
     }
+
+    componentDidMount() {
+      UploadStore.listen(this.onChange);
+    }
+
+    componentWillUnmount() {
+      UploadStore.unlisten(this.onChange);
+    }
+
+    onChange(state) {
+      this.setState(state);
+    }
+
 
     render() {
         return (
             <div>
 
-                <Dropzone className="uploadBox" onDrop={
+                <Dropzone className="uploadBox" onDrop= {
                         (acceptedFile) => {
-                            console.log(acceptedFile)
-                            this.setState({
-                                file: acceptedFile
-                            });
-                            //do thumbnail stuff
-                            //then upload to api
+                            //call action
+                            UploadActions.uploadImage(file);
                         }
                     }>
 
-                    <Icon className="upload-arrow" >cloud_upload</Icon>
+                    <Icon className="upload-arrow">cloud_upload</Icon>
 
                     { /*{this.state.file.length > 0 ? <div>
 
@@ -99,11 +137,6 @@ class ImageSelection extends React.Component {
     //must scroll down after successful upload or pressing a button/pressing enter after writing url
     render() {
 
-      const header = {
-
-          'textAlign': 'center'
-      };
-
       const center = {
           'textAlign': 'center'
       };
@@ -114,14 +147,17 @@ class ImageSelection extends React.Component {
 
       };
 
-
       return (
         <div >
           <div className="box2">
-              <Row >
-                <h2 style={header}> First, we need a cat </h2>
-                <p style={center}> Upload an image or copy and paste a URL </p>
+
+              <Row>
+                <h2 style={center}> First, we need a cat </h2>
+                <p style={center}> Upload an image or copy and paste a URL, and our algorithm will <br></br> find similarly-looking cats
+                    that are up for adoption.
+                </p>
               </Row>
+
               <Row className="image-select">
                 <Col className="m2 l2">
                 </Col>
@@ -140,13 +176,16 @@ class ImageSelection extends React.Component {
                     <Input  s={8} label="Image URL" />
                 </Col>
 
-              </Row>
-              <Link to="image-submit" smooth={true} duration={500} spy={true}>
-                  <div className="nextBox2-container">
-                      <Icon className="nextBox2">arrow_downward</Icon>
+                <Link to="image-submit" smooth={true} duration={500} spy={true}>
+                    <div className="nextBox2-container">
+                        <Icon className="nextBox2">arrow_downward</Icon>
 
-                  </div>
-              </Link>
+                    </div>
+                </Link>
+
+              </Row>
+
+
 
           </div>
         </div>
@@ -190,7 +229,7 @@ class SubmitImage extends React.Component {
 
             </Row>
 
-            <Row >
+            <Row>
                 <Col className="m4 l4"> </Col>
 
                 <Col className="m4 l4 ">
@@ -234,7 +273,6 @@ class Landing extends React.Component {
 
         return (
           <div>
-
                 <Intro titleDuration={1} subtitleDuration={2.5} buttonDuration={6} />
                 <Element name="image-select" className="element">
                     <ImageSelection />
@@ -244,9 +282,6 @@ class Landing extends React.Component {
                 <Element name="image-submit" className="element">
                     <SubmitImage />
                 </Element>
-
-
-
           </div>
 
         );
