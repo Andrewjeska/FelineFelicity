@@ -28,15 +28,14 @@ app.get('/api/test', (req, res)=> {
 });
 
 app.post('/api/upload', upload.single('file'), (req, res) => {
-	//temp = req.file.buffer;
-	console.log(req.file);
-	handleUpload(req, res);
+	var image = req.file.buffer
+	handleUpload(image, res);
 	//at scale : will just upload to aws lambda function
 
 });
 
-function handleUpload(req, res) {
-	getDetections(req.file.buffer)
+function handleUpload(image, res) {
+	getDetections(image)
 		.then( (detections) => {
 
 			if(detections[0] !== 'cat') {
@@ -47,6 +46,7 @@ function handleUpload(req, res) {
 					.then( (params) => {
 						//res.send(response from petfinder api), append isCat
 						res.send({'isCat' : true})
+						//also include link to the image
 					});
 			}
 		})

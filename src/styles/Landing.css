@@ -137,27 +137,48 @@ body {
     margin-right: 1% !important;
     height: 250px !important;
     width: 250px !important;
+    text-align: center;
+
+
 
 
 }
 
 .upload-arrow {
     font-size:80px;
-    margin-top:35%;
-    margin-left:35%;
+    position: relative;
+    top:35%;
 
 }
 
 .thumbnail {
-    height:100px;
-    width:100px;
-    overflow: hidden;
+
+    position: relative;
+    display: inline-block;
+    max-height: 150px;
+    max-width: 150px;
+    margin: 0 auto;
+    padding:0;
+
+
+
 
 }
 
 .thumbnail img {
+    max-height: inherit;
+    max-width: inherit;
+    height: auto;
+    width: auto;
+    padding: 11px;
 
 
+}
+
+.removeIcon {
+    position: absolute;
+    top:0;
+    right:0;
 }
 
 .urldrop {

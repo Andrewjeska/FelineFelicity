@@ -53,20 +53,16 @@ function getDetections(picture){
     return new Promise( (resolve, reject) => {
 
         visionClient.detect(image, options, (err, detections, apiResponse) => {
-
-
             if(err){
               reject(err);
 
             }
-
             console.log(detections);
             resolve(detections);
 
         });
 
     });
-
 
 }
 
@@ -78,8 +74,6 @@ function getParams(detections){
     In this future, this will probably include color.
 
     */
-
-
         let sizes = {
             'Small To Medium Sized' : 'S',
             'Medium To Large Sized' : 'M'

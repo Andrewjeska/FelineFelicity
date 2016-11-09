@@ -88,8 +88,12 @@ class About extends React.Component {
 class Upload extends React.Component {
     constructor() {
         super();
-        this.state = {file: {}};
+        this.state = {
+            file: {},
+            isCat: false
+        };
         this.onChange = this.onChange.bind(this)
+        this.createPreview = this.createPreview.bind(this)
     }
 
     componentDidMount() {
@@ -101,39 +105,66 @@ class Upload extends React.Component {
     }
 
     onChange(state) {
-      this.setState(state);
-      console.log(state);
+     // console.log(this.state)
+      this.setState({isCat: state.isCat});
+      //console.log(this.state);
 
+    }
+
+    createPreview(){
+        console.log(this.state.file[0].preview);
+        return(
+            <div className="thumbnail">
+                <Icon className="removeIcon"> cancel </Icon>
+            {
+                React.createElement('img',
+                {
+                  src: this.state.file[0].preview
+                },
+                null)
+            }
+            </div>
+        )
     }
 
 
     render() {
+
         return (
             <div>
 
-                <Dropzone className="uploadBox" onDrop= {
+                <Dropzone className="uploadBox" multiple={false} onDrop= {
                         (acceptedFile) => {
                             //call action
+                            //console.log(acceptedFile)
                             UploadActions.uploadImage(acceptedFile);
-                            //console.log(state);
+                            this.setState({file: acceptedFile})
+                            //remove Icon?
 
                         }
                     }>
 
-                    <Icon className="upload-arrow">cloud_upload</Icon>
+                {
+                    !this.state.isCat ?
+                        <Icon className="upload-arrow">cloud_upload</Icon>
+                     : null
+                }
 
-                    { /*{this.state.file.length > 0 ? <div>
 
-                        <div className="thumbnail">
-                            {
-                                this.state.file.map((file) =>
-                                    <img src={file.preview} />)
-                            }
-                        </div>
+                {
+                    this.state.isCat ?
 
-                        </div> : null} */}
+                        this.createPreview()
+
+                     : null
+                }
+
+
+
 
                 </Dropzone>
+
+
             </div>
         );
     }

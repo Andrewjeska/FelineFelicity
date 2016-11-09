@@ -2,8 +2,8 @@ var alt = require('../alt');
 var UploadSource = require('../sources/UploadSource');
 
 class UploadActions {
-    updateUploadBox(file){
-        return file;
+    updateUploadBox(response){
+        return response;
     }
 
     uploadImage(file) {
@@ -15,7 +15,7 @@ class UploadActions {
         UploadSource.sendFile(file)
             .then((response) => {
                 // we can access other actions within our action through `this.actions`
-            
+
                 this.updateUploadBox(response);
 
             //console.log(file);
