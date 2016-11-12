@@ -14,10 +14,8 @@ body {
     flex-direction: column;
     flex-wrap: wrap;
 
-
+    position: relative;
     height: 100%;
-
-
 
     background-color: #4f95ff;
   /* some kind of image */
@@ -27,12 +25,8 @@ body {
 
 
 .box2 {
-
-
-
     height: 100%;
     padding-top: .5%;
-
     /*background-color: #20b2db;*/
 
   /* some kind of image */
@@ -48,9 +42,9 @@ body {
 
 .nextBox-container {
     margin-top: 15%;
-    position: absolute;;
+    position: relative;
     text-align: center;
-    left:46.25%;
+
 }
 
 .nextBox {
@@ -69,11 +63,10 @@ body {
 }
 
 .nextBox2-container {
-
-    position: absolute;
+    position: relative;;
     text-align: center;
-    left:46.25%;
-    padding-top: 30%;
+    margin-bottom: 2%;
+    margin-top: 10%;
 
 
 }
@@ -97,7 +90,7 @@ body {
     text-align: center;
     vertical-align: middle;
     margin-top: 16%;
-    margin-bottom: 25.25%;
+    margin-bottom: 13.25%;
     /*flex: 1;
     align-self: stretch;*/
 
@@ -120,8 +113,6 @@ body {
 }
 
 .image-select {
-    padding-bottom: 18.15%;
-
 
 
 }
@@ -138,38 +129,45 @@ body {
     height: 250px !important;
     width: 250px !important;
     text-align: center;
-
-
+    display: table;
 
 
 }
 
 .upload-arrow {
     font-size:80px;
-    position: relative;
-    top:35%;
+    vertical-align: middle;
+    display: table-cell;
 
 }
 
 .thumbnail {
-
     position: relative;
-    display: inline-block;
-    max-height: 150px;
-    max-width: 150px;
-    margin: 0 auto;
-    padding:0;
-
-
+    vertical-align: middle;
+    max-height: 200px;
+    max-width: 200px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
 
 
 }
 
-.thumbnail img {
-    max-height: inherit;
+.imgHolder {
+    margin: 0 auto;
+    position: relative;
     max-width: inherit;
-    height: auto;
+    max-height: inherit;
+    overflow: hidden;
+    display: inline-block;
+
+}
+
+.imgHolder img {
+    max-height: 100%;
+    max-width: 100%;
     width: auto;
+    height: auto;
     padding: 11px;
 
 
@@ -179,7 +177,11 @@ body {
     position: absolute;
     top:0;
     right:0;
+    cursor: pointer;
+    color:black !important
 }
+
+
 
 .urldrop {
     padding-top: 6% !important;

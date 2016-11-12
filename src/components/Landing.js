@@ -19,9 +19,13 @@ var scrollSpy  = Scroll.scrollSpy;
 
 //stores
 var UploadStore = require('../stores/UploadStore');
+var SearchResultsStore = require('../stores/SearchResultsStore')
 
 //actions
 var UploadActions = require('../actions/UploadActions');
+var SearchResultsActions = require('../actions/SearchResultsActions') //use for submiting postal code
+
+const maxImageSize = 4000000;
 
 class Intro extends React.Component {
     //needs a fancy fadein navbar. Should be have About For Shelters and on the right, log in.
@@ -46,7 +50,7 @@ class Intro extends React.Component {
 
                 <div className="box1">
                     <div className="intro">
-
+                        <Row>
                             <Fade duration={this.props.titleDuration}>
                                 <h1 className="title"> Petly </h1>
                             </Fade>
@@ -56,6 +60,7 @@ class Intro extends React.Component {
                                  in your area.
                                 </p>
                             </Fade>
+                        </Row>
 
                             <Fade duration={this.props.buttonDuration}>
 
@@ -68,13 +73,8 @@ class Intro extends React.Component {
                                 </div>
                             </Fade>
 
-                            <div className="cat"></div>
-
-                            {/*} <Fade duration={this.props.catDuration}>
-
-                            </Fade> */}
-
                     </div>
+                    <div className="cat"></div>
                 </div>
             </div>
         );
@@ -90,10 +90,13 @@ class Upload extends React.Component {
         super();
         this.state = {
             file: {},
-            isCat: false
+            isCat: null,
+            canUpload: true
         };
         this.onChange = this.onChange.bind(this)
         this.createPreview = this.createPreview.bind(this)
+        this.handleImageRemove = this.handleImageRemove.bind(this)
+
     }
 
     componentDidMount() {
@@ -104,26 +107,59 @@ class Upload extends React.Component {
       UploadStore.unlisten(this.onChange);
     }
 
+
+     componentDidUpdate(){
+         if(!this.state.canUpload) {
+             $(".uploadBox input").prop("disabled", true)
+             $(".uploadBox").css("cursor", "default")
+
+         } else {
+             $(".uploadBox input").prop("disabled", false)
+             $(".uploadBox").css("cursor", "pointer")
+         }
+
+         if(this.state.isCat !== null){
+            if(this.state.file[0] && !this.state.isCat) {
+                console.log("not a cat")
+                Materialize.toast("This does not look like a cat!", 2000)
+                this.handleImageRemove();
+            }
+         }
+    }
+
     onChange(state) {
-     // console.log(this.state)
       this.setState({isCat: state.isCat});
-      //console.log(this.state);
+
 
     }
 
+    handleImageRemove(){
+        this.setState(
+        {
+            file: {},
+            isCat: null,
+            canUpload: true
+
+        })
+    }
+
+
     createPreview(){
-        console.log(this.state.file[0].preview);
+
         return(
             <div className="thumbnail">
-                <Icon className="removeIcon"> cancel </Icon>
-            {
-                React.createElement('img',
-                {
-                  src: this.state.file[0].preview
-                },
-                null)
-            }
+                <div className="imgHolder">
+                    <a onClick={this.handleImageRemove}><Icon className="removeIcon" > cancel </Icon></a>
+                    {
+                        React.createElement('img',
+                        {
+                          src: this.state.file[0].preview
+                        },
+                        null)
+                    }
+                </div>
             </div>
+
         )
     }
 
@@ -133,38 +169,28 @@ class Upload extends React.Component {
         return (
             <div>
 
-                <Dropzone className="uploadBox" multiple={false} onDrop= {
+                <Dropzone className="uploadBox" maxSize={4000000} multiple={false} onDrop= {
                         (acceptedFile) => {
-                            //call action
-                            //console.log(acceptedFile)
-                            UploadActions.uploadImage(acceptedFile);
-                            this.setState({file: acceptedFile})
-                            //remove Icon?
+                            this.setState(
+                            {
+                                file: acceptedFile,
+                                canUpload: false
 
+                            });
+
+                            UploadActions.uploadImage(acceptedFile)
                         }
                     }>
 
                 {
-                    !this.state.isCat ?
-                        <Icon className="upload-arrow">cloud_upload</Icon>
-                     : null
-                }
-
-
-                {
-                    this.state.isCat ?
-
+                    this.state.file[0] ?
                         this.createPreview()
 
-                     : null
+                     : <Icon className="upload-arrow">cloud_upload</Icon>
                 }
-
-
 
 
                 </Dropzone>
-
-
             </div>
         );
     }
@@ -186,7 +212,7 @@ class ImageSelection extends React.Component {
 
       return (
         <div >
-          <div className="box2">
+          <div className="box2" style={center}>
 
               <Row>
                 <h2 style={center}> First, we need a cat </h2>
@@ -196,34 +222,31 @@ class ImageSelection extends React.Component {
               </Row>
 
               <Row className="image-select">
-                <Col className="m2 l2">
+                <Col className="m2 l2 s12">
                 </Col>
 
-                <Col className="m3 l3">
+                <Col className="m3 l3 s12">
                     <Upload />
                 </Col>
 
-                <Col className="m2 l2" style={big_OR_col}>
+                <Col className="m2 l2 s12" style={big_OR_col}>
                     <div className="big-OR"> OR </div>
 
                 </Col>
 
-                <Col className="m5 l5 urldrop">
+                <Col className="m5 l5 s12 urldrop">
                     {/* url drop */}
                     <Input  s={8} label="Image URL" />
                 </Col>
-
-                <Link to="image-submit" smooth={true} duration={500} spy={true}>
-                    <div className="nextBox2-container">
-                        <Icon className="nextBox2">arrow_downward</Icon>
-
-                    </div>
-                </Link>
-
               </Row>
 
 
+              <Link to="image-submit" smooth={true} duration={500} spy={true}>
+                  <div className="nextBox2-container">
+                      <Icon className="nextBox2">arrow_downward</Icon>
 
+                  </div>
+              </Link>
           </div>
         </div>
 
@@ -245,9 +268,13 @@ class SubmitImage extends React.Component {
             'color': 'white'
         };
 
+        const center2 = {
+            'textAlign': 'center'
+        }
+
 
       return (
-        <div className="box3">
+        <div className="box3" style={center2}>
             <Row >
               <h2 style={header}> Where should we look? </h2>
               <p style={center}> Enter your Postal Code then click on "Find Cats" to begin your search </p>
@@ -256,7 +283,7 @@ class SubmitImage extends React.Component {
             <Row >
                 <Col className="m4 l4"> </Col>
 
-                <Col className="m4 l4 ">
+                <Col className="m4 l4 s12">
                     <div className="zip">
                         <Input  s={10} label="Postal Code" />
                     </div>
@@ -271,7 +298,15 @@ class SubmitImage extends React.Component {
 
                 <Col className="m4 l4 ">
                     <div>
-                        <Button waves='light'>Find Cats</Button>
+                        <a onClick={ () => {
+
+                            SearchResultsActions.submitPostal(
+                                $('.zip input').val()
+                            )}
+
+                        }>
+                        <Button waves='light'> Find Cats</Button></a>
+
                     </div>
                 </Col>
 
@@ -304,6 +339,8 @@ class Landing extends React.Component {
     componentWillUnmount() {
       Events.scrollEvent.remove('begin');
       Events.scrollEvent.remove('end');
+
+
     }
 
       render() {

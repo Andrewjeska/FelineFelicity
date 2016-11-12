@@ -1,9 +1,11 @@
 var alt = require('../alt');
 var UploadSource = require('../sources/UploadSource');
+var Promise = require('bluebird');
 
 class UploadActions {
     updateUploadBox(response){
         return response;
+
     }
 
     uploadImage(file) {

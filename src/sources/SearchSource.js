@@ -6,16 +6,16 @@ import Promise from 'bluebird';
 const port = '3000';
 
 const UploadSource = {
-    sendFile(file) {
-            var data = new FormData();
-            data.append('file', file[0])
+    searchForPets(params) {
+            //var data = new FormData();
+            //data.append('file', file[0])
 
             return new Promise( (resolve, reject) => {
-                fetch('http://localhost:' + port + '/api/upload' , {
-                    method: 'POST',
-                    body: data
+                fetch('http://localhost:' + port + '/api/search' , {
+                    method: 'GET',
+                    body: params
                 }).then( (response) => {
-                    
+
                     resolve(response.json());
                 });
 

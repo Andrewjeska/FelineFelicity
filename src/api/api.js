@@ -7,6 +7,8 @@ const multer = require('multer');
 const config = require('./config.json');
 const getDetections = require('./image_analysis/cat_attr').getDetections;
 const parseVisionData = require('./image_analysis/cat_attr').parseVisionData;
+const getPets = require('./lib/petfinder')
+
 
 var app = express();
 
@@ -28,9 +30,9 @@ app.get('/api/test', (req, res)=> {
 });
 
 app.post('/api/upload', upload.single('file'), (req, res) => {
-	var image = req.file.buffer
+	var image = new Buffer(req.file.buffer)
 	handleUpload(image, res);
-	//at scale : will just upload to aws lambda function
+		//at scale : will just upload to aws lambda function
 
 });
 
@@ -45,15 +47,20 @@ function handleUpload(image, res) {
 				parseVisionData(detections)
 					.then( (params) => {
 						//res.send(response from petfinder api), append isCat
-						res.send({'isCat' : true})
-						//also include link to the image
-					});
+						res.send({
+							'isCat' : true,
+							'params': params
+						})
+				});
 			}
 		})
 
-	//res.send({'error':'functions did not run'})
-
 }
+
+app.get('/api/search', (req, res) => {
+	getPets(req.body.params, res);
+	//does this work?
+});
 
 
 //starting app

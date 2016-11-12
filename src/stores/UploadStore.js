@@ -4,7 +4,7 @@ var UploadActions = require('../actions/UploadActions');
 
 class UploadStore {
   constructor() {
-    this.file = [];
+
     this.isCat = false;
 
     this.bindListeners({
@@ -13,9 +13,8 @@ class UploadStore {
   }
 
   handleUploadedFile(response) {
-    
-    //this.file = file;
     this.isCat = response.isCat
+
   }
 }
 
