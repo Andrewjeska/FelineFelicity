@@ -7,6 +7,7 @@ const port = '3000';
 
 const UploadSource = {
     sendFile(file) {
+            //console.log(file);
             var data = new FormData();
             data.append('file', file[0])
 
@@ -15,7 +16,7 @@ const UploadSource = {
                     method: 'POST',
                     body: data
                 }).then( (response) => {
-                    
+
                     resolve(response.json());
                 });
 

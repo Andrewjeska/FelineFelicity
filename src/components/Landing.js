@@ -10,6 +10,9 @@ import { Button, Card, Row, Col, Icon, Input, Navbar, NavItem, Dropdown } from '
 import Fade from 'react-fade';
 import Dropzone from 'react-dropzone';
 import Scroll from 'react-scroll';
+import Promise from 'bluebird';
+
+const Link1 = require('react-router').Link;
 
 
 var Link       = Scroll.Link;
@@ -17,13 +20,14 @@ var Element    = Scroll.Element;
 var Events     = Scroll.Events;
 var scrollSpy  = Scroll.scrollSpy;
 
+//actions
+var UploadActions = require('../actions/UploadActions');
+var submitPostal= require('../actions/SearchResultsActions').updatePostal //use for submiting postal code
+
 //stores
 var UploadStore = require('../stores/UploadStore');
 var SearchResultsStore = require('../stores/SearchResultsStore')
 
-//actions
-var UploadActions = require('../actions/UploadActions');
-var SearchResultsActions = require('../actions/SearchResultsActions') //use for submiting postal code
 
 const maxImageSize = 4000000;
 
@@ -52,11 +56,11 @@ class Intro extends React.Component {
                     <div className="intro">
                         <Row>
                             <Fade duration={this.props.titleDuration}>
-                                <h1 className="title"> Petly </h1>
+                                <h1 className="title"> FelineFelicity </h1>
                             </Fade>
 
                             <Fade duration={this.props.subtitleDuration}>
-                                <p className="subtitle"> Welcome to Petly. A platform for finding pets that are up for adoption
+                                <p className="subtitle"> Welcome to FelineFelicity. A platform for finding pets that are up for adoption
                                  in your area.
                                 </p>
                             </Fade>
@@ -81,9 +85,6 @@ class Intro extends React.Component {
     }
 }
 
-class About extends React.Component {
-
-}
 
 class Upload extends React.Component {
     constructor() {
@@ -198,6 +199,7 @@ class Upload extends React.Component {
 
 class ImageSelection extends React.Component {
     //must scroll down after successful upload or pressing a button/pressing enter after writing url
+
     render() {
 
       const center = {
@@ -236,7 +238,7 @@ class ImageSelection extends React.Component {
 
                 <Col className="m5 l5 s12 urldrop">
                     {/* url drop */}
-                    <Input  s={8} label="Image URL" />
+                    <Input  s={8} label="Image URL support coming soon!" />
                 </Col>
               </Row>
 
@@ -256,6 +258,42 @@ class ImageSelection extends React.Component {
 }
 
 class SubmitImage extends React.Component {
+    constructor(){
+        super();
+        this.state = {
+            params: {}
+        }
+
+        this.onChange = this.onChange.bind(this)
+    }
+
+    componentDidMount() {
+      SearchResultsStore.listen(this.onChange);
+    }
+
+    componentWillUnmount() {
+      SearchResultsStore.unlisten(this.onChange);
+    }
+
+    onChange(state){
+        console.log(this.state);
+        this.setState({
+            params: state.params
+        });
+
+        console.log(this.state);
+    }
+
+    findPetsOnClickListener() {
+        return new Promise( (resolve, reject) => {
+            resolve(
+                submitPostal(
+                    $('.zip input').val()
+                )
+            )
+        });
+    }
+
     render() {
         const header = {
             'paddingTop': '4%',
@@ -298,14 +336,27 @@ class SubmitImage extends React.Component {
 
                 <Col className="m4 l4 ">
                     <div>
-                        <a onClick={ () => {
+                        <Link1 to={
+                            {   pathname: '/search',
+                                query: {
+                                    breed: this.state.params.breed,
+                                    size: this.state.params.size,
+                                    postal: "21784"
 
-                            SearchResultsActions.submitPostal(
-                                $('.zip input').val()
-                            )}
+                                }
+
+                            }}
+
+                            onClick={ () => {
+
+                                this.findPetsOnClickListener()
+
+                            //redirect to next page
+                        }
 
                         }>
-                        <Button waves='light'> Find Cats</Button></a>
+                        <Button waves='light'> Find Cats</Button>
+                        </Link1>
 
                     </div>
                 </Col>

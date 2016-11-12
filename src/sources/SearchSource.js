@@ -7,13 +7,17 @@ const port = '3000';
 
 const UploadSource = {
     searchForPets(params) {
+        console.log(params)
             //var data = new FormData();
             //data.append('file', file[0])
 
             return new Promise( (resolve, reject) => {
                 fetch('http://localhost:' + port + '/api/search' , {
-                    method: 'GET',
-                    body: params
+                    method: 'POST',
+                    body: JSON.stringify(params),
+                    headers: new Headers({
+                		'Content-Type': 'application/json'
+                	})
                 }).then( (response) => {
 
                     resolve(response.json());

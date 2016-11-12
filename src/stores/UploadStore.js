@@ -8,12 +8,13 @@ class UploadStore {
     this.isCat = false;
 
     this.bindListeners({
-      handleUploadedFile: UploadActions.UPDATE_UPLOAD_BOX
+      handleUploadedFile: UploadActions.updateUploadBox
     });
   }
 
   handleUploadedFile(response) {
     this.isCat = response.isCat
+    //will prevent image removal from dropzone
 
   }
 }

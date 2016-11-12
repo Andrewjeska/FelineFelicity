@@ -24,9 +24,9 @@ let breed_url = "http://api.petfinder.com/breed.list?"
 
 
 
-function getCats(search_params, res) {
+function getPets(search_params, res) {
 
-    //console.log(find_url);
+    
     let request_url = find_url + "&location="+ search_params.postal + "&breed=" + search_params.breed + "&size=" + search_params.size;
     console.log(request_url);
 
@@ -103,4 +103,4 @@ function getCatsCallback(res, cat_meta){
     res.send(cat_meta);
 }
 
-module.exports = getCats;
+module.exports = getPets;

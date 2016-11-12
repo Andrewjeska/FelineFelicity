@@ -57,8 +57,8 @@ function handleUpload(image, res) {
 
 }
 
-app.get('/api/search', (req, res) => {
-	getPets(req.body.params, res);
+app.post('/api/search', (req, res) => {
+	getPets(req.body, res);
 	//does this work?
 });
 
