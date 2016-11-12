@@ -6,12 +6,16 @@ const WebpackDevServer = require('webpack-dev-server');
 const config = require('./webpack.config');
 const open = require('open');
 
+let port = config.port;
+
+if(process.env.NODE_ENV == 'production') port = process.env.PORT;
+
 new WebpackDevServer(webpack(config), config.devServer)
-.listen(config.port, 'localhost', (err) => {
+.listen(port, 'localhost', (err) => {
   if (err) {
     console.log(err);
   }
-  console.log('Listening at localhost:' + config.port);
+  console.log('Listening at localhost:' + port);
   console.log('Opening your system browser...');
-  open('http://localhost:' + config.port);
+  open('http://localhost:' + port);
 });
