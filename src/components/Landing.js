@@ -276,22 +276,12 @@ class SubmitImage extends React.Component {
     }
 
     onChange(state){
-        console.log(this.state);
+
         this.setState({
             params: state.params
         });
 
-        console.log(this.state);
-    }
 
-    findPetsOnClickListener() {
-        return new Promise( (resolve, reject) => {
-            resolve(
-                submitPostal(
-                    $('.zip input').val()
-                )
-            )
-        });
     }
 
     render() {
@@ -311,6 +301,8 @@ class SubmitImage extends React.Component {
         }
 
 
+
+
       return (
         <div className="box3" style={center2}>
             <Row >
@@ -321,44 +313,49 @@ class SubmitImage extends React.Component {
             <Row >
                 <Col className="m4 l4"> </Col>
 
-                <Col className="m4 l4 s12">
-                    <div className="zip">
-                        <Input  s={10} label="Postal Code" />
+                <Col className="m4 l4">
+
+                    <div className="zip" style={center}>
+                        <Input id='zip' s={10} label="Postal Code" />
+
                     </div>
+
+
+                        <a onClick={ () => {
+                            submitPostal(
+                                document.getElementById('zip').value
+                            )
+                        }}> <Button > Submit </Button></a>
+
+
                 </Col>
 
                 <Col className="m4 l4"> </Col>
 
             </Row>
 
+
             <Row>
                 <Col className="m4 l4"> </Col>
 
                 <Col className="m4 l4 ">
-                    <div>
+                    { this.state.params.postal  && <div>
                         <Link1 to={
                             {   pathname: '/search',
                                 query: {
                                     breed: this.state.params.breed,
                                     size: this.state.params.size,
-                                    postal: "21784"
+                                    postal: this.state.params.postal
 
                                 }
 
-                            }}
-
-                            onClick={ () => {
-
-                                this.findPetsOnClickListener()
-
-                            //redirect to next page
-                        }
-
-                        }>
-                        <Button waves='light'> Find Cats</Button>
+                            }}>
+                            <Fade duration={.90}>
+                                <Button  waves='light'> Find Pets!</Button>
+                            </Fade>
                         </Link1>
 
-                    </div>
+                    </div>  }
                 </Col>
 
                 <Col className="m4 l4"> </Col>

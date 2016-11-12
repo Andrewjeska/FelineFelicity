@@ -5,8 +5,8 @@ var SearchResultsActions = require('../actions/SearchResultsActions')
 
 class SearchResultsStore {
   constructor() {
-    this.pet_meta = null;
-    this.params = null;
+    this.pet_meta = {};
+    this.params = {};
     this.page_number = 0;
 
     this.bindListeners({
@@ -38,7 +38,7 @@ class SearchResultsStore {
 
   handleSubmitPostal(postal){
       this.params.postal = postal;
-      //console.log(this.params);
+      console.log(this.params);
 
       //adds postal code to params
 

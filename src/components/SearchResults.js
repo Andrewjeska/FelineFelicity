@@ -41,7 +41,8 @@ class ResultsContainer extends React.Component {
             page_number: 0
         };
 
-        SearchResultsActions.searchForPets(this.state.params);
+        if(this.props.params.breed)
+            SearchResultsActions.searchForPets(this.state.params);
 
         this.renderPetCard = this.renderPetCard.bind(this)
         this.onChange = this.onChange.bind(this)
@@ -86,13 +87,12 @@ class ResultsContainer extends React.Component {
 
     render() {
 
-        const paginationStyle = {
-            paddingLeft: '20%',
-            paddingRight: '20%'
-        }
+
+
         if(this.state.pet_meta[0]) {
 
             return(
+
                 <div>
                     <Row>
                         <Col className="m4 s12">
@@ -127,11 +127,13 @@ class ResultsContainer extends React.Component {
                         <Col className="m5 s12"/>
 
                     </Row>
+
+
                 </div>
             )
         }
 
-        return(<span> I'm an error </span>)
+        return(null)
     }
 }
 

@@ -26,7 +26,7 @@ let breed_url = "http://api.petfinder.com/breed.list?"
 
 function getPets(search_params, res) {
 
-    
+
     let request_url = find_url + "&location="+ search_params.postal + "&breed=" + search_params.breed + "&size=" + search_params.size;
     console.log(request_url);
 
@@ -69,7 +69,7 @@ function getPets(search_params, res) {
                 var adopt_link = adopt_url + curr_cat.id.$t;
 
                 if(typeof description !== 'undefined') { //some cats don't have descriptions
-                    description = description.replace(/\n/g, '<br />');
+                    description = description.replace(/(?:\r\n|\r|\n)/g, '<br />');
                     //change newlines to breaks if we have a description
 
                 } else {

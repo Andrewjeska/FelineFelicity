@@ -37,7 +37,7 @@ body {
     text-align: center;
     /*background-color: #42f492;*/
     background-color: #4f95ff;
-    padding-bottom: 28.2%;
+    padding-bottom: 28%;
 }
 
 .nextBox-container {
@@ -203,6 +203,8 @@ body {
 
 .zip {
     padding-left: 20% !important;
+    padding-right: 10% !important;
+    vertical-align: middle;
 }
 
 .zip label{
@@ -221,4 +223,8 @@ body {
 input[type=text]:focus {
     border-bottom: 1px solid black !important;
 
+}
+
+.submitButton {
+    padding-left: 20%;
 }
