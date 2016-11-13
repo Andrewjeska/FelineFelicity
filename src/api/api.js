@@ -64,10 +64,10 @@ app.post('/search', (req, res) => {
 
 
 //starting app
-app.listen(process.env.API_PORT)
+//app.listen(process.env.API_PORT)
 //server.listen(process.env.PORT || config.port);
 
-console.log(`API server started on port 3000`);
+//console.log(`API server started on port 3000`);
 
 
 

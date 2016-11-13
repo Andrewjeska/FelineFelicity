@@ -3,7 +3,7 @@
 import 'whatwg-fetch';
 
 import Promise from 'bluebird';
-const port = process.env.API_PORT || 8080;
+const port = process.env.PORT;
 
 const UploadSource = {
     sendFile(file) {
@@ -12,7 +12,7 @@ const UploadSource = {
             data.append('file', file[0])
 
             return new Promise( (resolve, reject) => {
-                fetch('https://localhost:' + port + '/api/upload' , {
+                fetch('/api/upload' , {
                     method: 'POST',
                     body: data
                 }).then( (response) => {

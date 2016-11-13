@@ -3,16 +3,16 @@
 import 'whatwg-fetch';
 
 import Promise from 'bluebird';
-const port = process.env.API_PORT || 8080;
+const port = process.env.PORT
 
 const UploadSource = {
     searchForPets(params) {
-        console.log(params)
+        //console.log(params)
             //var data = new FormData();
             //data.append('file', file[0])
 
             return new Promise( (resolve, reject) => {
-                fetch('https://localhost:' + port + '/api/search' , {
+                fetch('/api/search' , {
                     method: 'POST',
                     body: JSON.stringify(params),
                     headers: new Headers({
