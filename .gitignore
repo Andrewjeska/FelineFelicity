@@ -9,7 +9,6 @@ pids
 
 
 .eslintrc
-.babelrc
 .editorconfig
 .DS_Store
 .yo-rc.json
