@@ -6,11 +6,16 @@ import Search from './components/SearchResults';
 import { Router, Route, Link, browserHistory } from 'react-router'
 
 // Render the main component into the dom
+
+const routes = (
+
+<Router history={browserHistory}>
+    <Route path="/" component={Landing}/>
+        <Route path="search" component={Search}/>
+
+
+</Router>)
 ReactDOM.render((
-    <Router history={browserHistory}>
-        <Route path="/" component={Landing}/>
-            <Route path="search" component={Search}/>
+    routes
 
-
-  </Router>
   ), document.getElementById('root'));

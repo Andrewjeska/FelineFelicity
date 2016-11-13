@@ -1,6 +1,6 @@
 //takes descriptions
 //returns links to images (write to Json?)
-
+'use strict';
 var request = require('request');
 
 /* TODO: Make a method that gets the most recent breeds */
