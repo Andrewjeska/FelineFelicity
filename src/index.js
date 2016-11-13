@@ -11,9 +11,9 @@ import { Router, Route, Link, browserHistory } from 'react-router'
 
 //)
 
-ReactDOM.render(<Router history={browserHistory}>
+ReactDOM.render(()<Router history={browserHistory}>
     <Route path="/" component={Landing}/>
         <Route path="search" component={Search}/>
 
 
-</Router>, document.getElementById('root'));
+</Router>), document.getElementById('root'));
