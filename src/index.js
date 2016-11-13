@@ -16,9 +16,6 @@ const routes = (<Router history={browserHistory}>
     <Route path="search" component={Search}/>
 </Router>)
 
-render( routes
-
-
-, document.getElementById('root'));
+render(routes, document.getElementById('root'));
 
 module.exports = routes;

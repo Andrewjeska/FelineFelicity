@@ -37,22 +37,23 @@ class Intro extends React.Component {
 
         return (
             <div>
+
+
+                <div className="box1">
                 <Navbar left>
                   <NavItem href='about.html'>About</NavItem>
                   <NavItem href='forShelters.html'>For Shelters</NavItem>
 
-                  <Dropdown trigger={
+                 {/* <Dropdown trigger={
                     <span>Account</span>
                   }>
                   <NavItem>Pets</NavItem>
                   <NavItem>Forms</NavItem>
                   <NavItem divider />
                   <NavItem>Settings</NavItem>
-                </Dropdown>
+                </Dropdown> */}
 
                 </Navbar>
-
-                <div className="box1">
                     <div className="intro">
                         <Row>
                             <Fade duration={this.props.titleDuration}>
@@ -208,7 +209,7 @@ class ImageSelection extends React.Component {
 
       const big_OR_col = {
           'paddingTop': '6%',
-          'paddingLeft': '6%'
+          'paddingLeft': '5.8%'
 
       };
 
@@ -227,20 +228,20 @@ class ImageSelection extends React.Component {
                 </p>
               </Row>
 
-              <Row className="image-select">
-                <Col className="m2 l2 s12">
+              <Row>
+                <Col s={12} m={2} l={2}>
                 </Col>
 
-                <Col className="m3 l3 s12" style={left}>
+                <Col s={12} m={3} l={3} style={left}>
                     <Upload />
                 </Col>
 
-                <Col className="m2 l2 s12" style={big_OR_col}>
+                <Col s={12} m={2} l={2} style={big_OR_col}>
                     <div className="big-OR"> OR </div>
 
                 </Col>
 
-                <Col className="m5 l5 s12 urldrop">
+                <Col s={12} m={5} l={5} className="urldrop">
                     {/* url drop */}
                     <Input  s={8} label="Image URL support coming soon!" />
                 </Col>
@@ -290,7 +291,7 @@ class SubmitImage extends React.Component {
 
     render() {
         const header = {
-            'paddingTop': '4%',
+            'paddingTop': '3%',
             'textAlign': 'center',
             'color': 'white'
         };
@@ -311,16 +312,16 @@ class SubmitImage extends React.Component {
         <div className="box3" style={center2}>
             <Row >
               <h2 style={header}> Where should we look? </h2>
-              <p style={center}> Enter your Postal Code then click on "Find Cats" to begin your search </p>
+              <p style={center}> Enter and submit your Postal code, then click on "Find Pets!" to begin your search </p>
             </Row>
 
             <Row >
-                <Col className="m4 l4"> </Col>
+                <Col m={4} l={4} > </Col>
 
-                <Col className="m4 l4">
+                <Col m={4} l={4} style={center2}>
 
-                    <div className="zip" style={center}>
-                        <Input id='zip' s={10} label="Postal Code" />
+                    <div className="zip" >
+                        <Input id='zip' s={12} m={12} l={12} label="Postal Code" />
 
                     </div>
 
@@ -329,20 +330,23 @@ class SubmitImage extends React.Component {
                             submitPostal(
                                 document.getElementById('zip').value
                             )
+
+                            Materialize.toast("Please write in your zip code", 2000)
+
                         }}> <Button > Submit </Button></a>
 
 
                 </Col>
 
-                <Col className="m4 l4"> </Col>
+                <Col m={4} l={4}> </Col>
 
             </Row>
 
 
             <Row>
-                <Col className="m4 l4"> </Col>
+                <Col m={4} l={4}> </Col>
 
-                <Col className="m4 l4 ">
+                <Col m={4} l={4}>
                     { this.state.params.postal  && <div>
                         <Link1 to={
                             {   pathname: '/search',
@@ -362,7 +366,7 @@ class SubmitImage extends React.Component {
                     </div>  }
                 </Col>
 
-                <Col className="m4 l4"> </Col>
+                <Col m={4} l={4}> </Col>
 
             </Row>
 

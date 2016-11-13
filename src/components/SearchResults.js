@@ -21,7 +21,7 @@ class PetCard extends React.Component {
             <Card
                 header={<CardTitle reveal image={this.props.image} waves='light'/>}
                 title={this.props.name}
-                reveal={<p>{this.props.description}</p>}
+                reveal={<div dangerouslySetInnerHTML={{__html: this.props.description}}/>}
                 actions={[<a href={this.props.adoption_link}>Adopt</a>]}>
                 <p>{this.props.city}, {this.props.state}</p>
 
@@ -41,8 +41,8 @@ class ResultsContainer extends React.Component {
             page_number: 0
         };
 
-        if(this.props.params.breed)
-            SearchResultsActions.searchForPets(this.state.params);
+        
+        SearchResultsActions.searchForPets(this.state.params);
 
         this.renderPetCard = this.renderPetCard.bind(this)
         this.onChange = this.onChange.bind(this)
