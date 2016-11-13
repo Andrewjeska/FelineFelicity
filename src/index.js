@@ -1,6 +1,7 @@
 import 'core-js/fn/object/assign';
 import React from 'react';
-import ReactDOM from 'react-dom';
+//import ReactDOM from 'react-dom';
+const ReactDOM = require('react-dom');
 import Landing from './components/Landing';
 import Search from './components/SearchResults';
 import { Router, Route, Link, browserHistory } from 'react-router'
@@ -12,7 +13,8 @@ import { Router, Route, Link, browserHistory } from 'react-router'
 //)
 
 
-ReactDOM.render((<Router history={browserHistory}>
+ReactDOM.render(
+    (<Router history={browserHistory}>
     <Route path="/" component={Landing}/>
         <Route path="search" component={Search}/>
 
