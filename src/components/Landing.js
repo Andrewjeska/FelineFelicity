@@ -67,18 +67,19 @@ class Intro extends React.Component {
                             </Fade>
                         </Row>
 
-                            <Fade duration={this.props.buttonDuration}>
 
-                                <div className="nextBox-container">
-
-                                    <Link to="image-select" smooth={true} duration={500} spy={true}>
-                                        <Icon className="nextBox">arrow_downward</Icon>
-                                    </Link>
-
-                                </div>
-                            </Fade>
 
                     </div>
+                    <Fade duration={this.props.buttonDuration}>
+
+                        <div className="nextBox-container">
+
+                            <Link to="image-select" smooth={true} duration={500} spy={true}>
+                                <Icon className="nextBox">arrow_downward</Icon>
+                            </Link>
+
+                        </div>
+                    </Fade>
                     <div className="cat"></div>
                 </div>
             </div>
@@ -209,7 +210,7 @@ class ImageSelection extends React.Component {
 
       const big_OR_col = {
           'paddingTop': '6%',
-          'paddingLeft': '5.8%'
+          'paddingLeft': '5.5%'
 
       };
 
@@ -228,22 +229,22 @@ class ImageSelection extends React.Component {
                 </p>
               </Row>
 
-              <Row>
-                <Col s={12} m={2} l={2}>
+              <Row className="image-select">
+                <Col className="image-select-col" s={2} m={2} l={2}>
                 </Col>
 
-                <Col s={12} m={3} l={3} style={left}>
+                <Col className="image-select-col" s={12} m={12} l={3} style={left}>
                     <Upload />
                 </Col>
 
-                <Col s={12} m={2} l={2} style={big_OR_col}>
+                <Col className="image-select-col" s={12} m={12} l={2} style={big_OR_col}>
                     <div className="big-OR"> OR </div>
 
                 </Col>
 
-                <Col s={12} m={5} l={5} className="urldrop">
+                <Col className="image-select-col" s={12} m={12} l={5} className="urldrop">
                     {/* url drop */}
-                    <Input  s={8} label="Image URL support coming soon!" />
+                    <Input  s={6} label="Image URL support coming soon!" />
                 </Col>
               </Row>
 
@@ -302,7 +303,9 @@ class SubmitImage extends React.Component {
         };
 
         const center2 = {
-            'textAlign': 'center'
+            'textAlign': 'center',
+            'float': 'none',
+            'margin': '0 auto'
         }
 
 
@@ -316,29 +319,38 @@ class SubmitImage extends React.Component {
             </Row>
 
             <Row >
-                <Col m={4} l={4} > </Col>
+                <Col s={3} m={4} l={5} > </Col>
 
-                <Col m={4} l={4} style={center2}>
+                <Col s={6} m={4} l={2} >
 
                     <div className="zip" >
                         <Input id='zip' s={12} m={12} l={12} label="Postal Code" />
 
                     </div>
 
-
-                        <a onClick={ () => {
-                            submitPostal(
-                                document.getElementById('zip').value
-                            )
-
-                            Materialize.toast("Please write in your zip code", 2000)
-
-                        }}> <Button > Submit </Button></a>
-
-
                 </Col>
 
-                <Col m={4} l={4}> </Col>
+                <Col s={3} m={4} l={5}> </Col>
+
+            </Row>
+
+            <Row>
+            <Col s={3} m={5} l={5}> </Col>
+
+            <Col s={6} m={2} l={2}>
+            <a onClick={ () => {
+                var postal = document.getElementById('zip').value
+                if(postal){
+                    submitPostal(postal)
+                } else {
+                    Materialize.toast("Please write in your zip code", 2000)
+                }
+
+            }}> <Button > Submit </Button></a>
+
+            </Col>
+            <Col s={3} m={5} l={5}> </Col>
+
 
             </Row>
 
