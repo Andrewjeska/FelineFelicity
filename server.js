@@ -1,21 +1,34 @@
-/*eslint no-console:0 */
-'use strict';
-require('core-js/fn/object/assign');
-const webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
-const config = require('./webpack.config');
-const open = require('open');
+var path = require('path');
+var express = require('express');
+var app = express();
+var PORT = process.env.PORT || 8080
+var api = require('./src/api/api.js')
 
-let port = config.port;
+// using webpack-dev-server and middleware in development environment
+if(process.env.NODE_ENV !== 'production') {
+  var webpackDevMiddleware = require('webpack-dev-middleware');
+  var webpackHotMiddleware = require('webpack-hot-middleware');
+  var webpack = require('webpack');
+  var config = require('./webpack.config');
+  var compiler = webpack(config);
 
-if(process.env.NODE_ENV == 'production') port = process.env.PORT;
+  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+  app.use(webpackHotMiddleware(compiler));
+}
 
-new WebpackDevServer(webpack(config), config.devServer)
-.listen(port, 'localhost', (err) => {
-  if (err) {
-    console.log(err);
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.get('/', function(request, response) {
+  response.sendFile(__dirname + '/dist/index.html')
+});
+
+app.use( '/api', api );
+
+
+app.listen(PORT, function(error) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.info("==> Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
   }
-  console.log('Listening at localhost:' + port);
-  console.log('Opening your system browser...');
-  open('http://localhost:' + port);
 });

@@ -25,11 +25,11 @@ var upload = multer({ storage: storage })
 //var temp = {};
 
 
-app.get('/api/test', (req, res)=> {
+app.get('/test', (req, res)=> {
 	res.send("Api call complete!")
 });
 
-app.post('/api/upload', upload.single('file'), (req, res) => {
+app.post('/upload', upload.single('file'), (req, res) => {
 	var image = new Buffer(req.file.buffer)
 	handleUpload(image, res);
 		//at scale : will just upload to aws lambda function
@@ -57,7 +57,7 @@ function handleUpload(image, res) {
 
 }
 
-app.post('/api/search', (req, res) => {
+app.post('/search', (req, res) => {
 	getPets(req.body, res);
 	//does this work?
 });
@@ -71,4 +71,4 @@ console.log(`API server started on port 3000`);
 
 
 
-//module.exports = app;
+module.exports = app;

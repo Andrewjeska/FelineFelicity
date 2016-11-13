@@ -11,6 +11,6 @@ ReactDOM.render((
         <Route path="/" component={Landing}/>
             <Route path="search" component={Search}/>
 
-        
+
   </Router>
-  ), document.getElementById('app'));
+  ), document.getElementById('root'));

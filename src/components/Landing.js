@@ -1,8 +1,8 @@
 'use strict';
 
 require('normalize.css/normalize.css');
-require('styles/Landing.css');
-require('styles/cat_animation.scss');
+require('../styles/Landing.css');
+require('../styles/cat_animation.scss');
 
 import React from 'react';
 import { Button, Card, Row, Col, Icon, Input, Navbar, NavItem, Dropdown } from 'react-materialize';
