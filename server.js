@@ -22,7 +22,7 @@ app.get('/', function(request, response) {
   response.sendFile(__dirname + '/dist/index.html')
 });
 
-app.use( '/api', api );
+app.use('/api', api );
 
 
 app.listen(PORT, function(error) {

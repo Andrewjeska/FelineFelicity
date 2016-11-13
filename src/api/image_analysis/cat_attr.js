@@ -1,5 +1,6 @@
 //calls google vision API
 //takes a picture of a cat and finds data such as color, size, breed, etc
+'use strict';
 
 const vision = require('@google-cloud/vision');
 const breeds = require('./breeds.js')
