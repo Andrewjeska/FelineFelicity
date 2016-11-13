@@ -12,7 +12,7 @@ const UploadSource = {
             data.append('file', file[0])
 
             return new Promise( (resolve, reject) => {
-                fetch('http://localhost:' + port + '/api/upload' , {
+                fetch('https://localhost:' + port + '/api/upload' , {
                     method: 'POST',
                     body: data
                 }).then( (response) => {
