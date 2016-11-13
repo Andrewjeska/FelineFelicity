@@ -28,7 +28,7 @@ function getPets(search_params, res) {
 
 
     let request_url = find_url + "&location="+ search_params.postal + "&breed=" + search_params.breed + "&size=" + search_params.size;
-    console.log(request_url);
+
 
     let adopt_url = "https://www.petfinder.com/adoption-inquiry/";
 
@@ -99,7 +99,7 @@ function getPets(search_params, res) {
 }
 
 function getCatsCallback(res, cat_meta){
-    console.log(cat_meta);
+    //console.log(cat_meta);
     res.send(cat_meta);
 }
 

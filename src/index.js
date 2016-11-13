@@ -11,12 +11,14 @@ import { Router, Route, Link, browserHistory } from 'react-router'
 // Render the main component into the dom
 
 
+const routes = (<Router history={browserHistory}>
+<Route path="/" component={Landing}/>
+    <Route path="search" component={Search}/>
+</Router>)
+
+render( routes
 
 
-render((
-    <Router history={browserHistory}>
-    <Route path="/" component={Landing}/>
-        <Route path="search" component={Search}/>
-    </Router>
+, document.getElementById('root'));
 
-), document.getElementById('root'));
+module.exports = routes;

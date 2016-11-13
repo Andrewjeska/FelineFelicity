@@ -208,9 +208,13 @@ class ImageSelection extends React.Component {
 
       const big_OR_col = {
           'paddingTop': '6%',
-          'paddingLeft': '5%'
+          'paddingLeft': '6%'
 
       };
+
+      const left = {
+          'paddingLeft': '5%'
+      }
 
       return (
         <div >
@@ -227,7 +231,7 @@ class ImageSelection extends React.Component {
                 <Col className="m2 l2 s12">
                 </Col>
 
-                <Col className="m3 l3 s12">
+                <Col className="m3 l3 s12" style={left}>
                     <Upload />
                 </Col>
 

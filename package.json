@@ -30,6 +30,7 @@
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-dropzone": "^3.7.3",
+    "react-engine": "^4.2.0",
     "react-fade": "^1.1.1",
     "react-materialize": "^0.17.2",
     "react-router": "^3.0.0",

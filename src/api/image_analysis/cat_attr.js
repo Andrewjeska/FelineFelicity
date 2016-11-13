@@ -58,7 +58,6 @@ function getDetections(picture){
               reject(err);
 
             }
-            console.log(detections);
             resolve(detections);
 
         });
@@ -68,7 +67,6 @@ function getDetections(picture){
 }
 
 function getParams(detections){
-    console.log("detections in getParams:" +  detections);
     /*
 
     Looks at detections, returns object with the valid parameters.
@@ -96,8 +94,7 @@ function getParams(detections){
 
 
         }
-        console.log(breed);
-        console.log(size);
+
 
         return {"breed": breed, "size": size} ;
 

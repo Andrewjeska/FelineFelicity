@@ -2,7 +2,7 @@ var path = require('path');
 var express = require('express');
 var app = express();
 var PORT = process.env.PORT || 8080
-var api = require('./src/api/api.js')
+var api = require('./src/api/api');
 
 // using webpack-dev-server and middleware in development environment
 if(process.env.NODE_ENV !== 'production') {
@@ -18,7 +18,8 @@ if(process.env.NODE_ENV !== 'production') {
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
-app.get('/', function(request, response) {
+
+app.get('*', function(request, response) {
   response.sendFile(__dirname + '/dist/index.html')
 });
 
