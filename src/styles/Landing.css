@@ -46,11 +46,10 @@ body {
 }
 
 .nextBox-container {
-    bottom:5%;
-
-    left:46.5%;
-    position: absolute;
+    position:absolute;;
+    bottom: 5%;
     text-align: center;
+    width: 100%;
 
 }
 
@@ -70,10 +69,10 @@ body {
 }
 
 .nextBox2-container {
-    bottom:5%;
-    left:46.5%;
-    position: absolute;
-    text-align: center
+    position:absolute;;
+    bottom: 5%;
+    text-align: center;
+    width: 100%;
 
 }
 
@@ -95,6 +94,7 @@ body {
     padding-top: 15%;
     position: relative;
     text-align: center;
+    /*padding-bottom: 20%;*/
 
 }
 

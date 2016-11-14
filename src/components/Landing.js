@@ -218,6 +218,10 @@ class ImageSelection extends React.Component {
           'paddingLeft': '5%'
       }
 
+      const bottom = {
+          'paddingBottom': "20%"
+      }
+
       return (
         <div >
           <div className="box2" style={center}>
@@ -229,7 +233,7 @@ class ImageSelection extends React.Component {
                 </p>
               </Row>
 
-              <Row className="image-select">
+              <Row className="image-select" style={bottom}>
                 <Col className="image-select-col" s={2} m={2} l={2}>
                 </Col>
 
