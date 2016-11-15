@@ -3,6 +3,8 @@ var express = require('express');
 var app = express();
 var PORT = process.env.PORT || 8080
 var api = require('./src/api/api');
+var http = require("http");
+
 
 // using webpack-dev-server and middleware in development environment
 if(process.env.NODE_ENV !== 'production') {
@@ -33,3 +35,7 @@ app.listen(PORT, function(error) {
     console.info("==> Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
   }
 });
+
+setInterval(function() {
+    http.get("http://feline-felicity.herokuapp.com");
+}, 300000);
