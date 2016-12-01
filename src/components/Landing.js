@@ -57,11 +57,11 @@ class Intro extends React.Component {
                     <div className="intro">
                         <Row>
                             <Fade duration={this.props.titleDuration}>
-                                <h1 className="title"> FelineFelicity </h1>
+                                <h1 className="title"> HappyCat </h1>
                             </Fade>
 
                             <Fade duration={this.props.subtitleDuration}>
-                                <p className="subtitle"> Welcome to FelineFelicity. A platform for finding pets that are up for adoption
+                                <p className="subtitle"> Welcome to HappyCat. A platform for finding pets that are up for adoption
                                  in your area.
                                 </p>
                             </Fade>

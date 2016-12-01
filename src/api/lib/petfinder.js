@@ -27,8 +27,10 @@ let breed_url = "http://api.petfinder.com/breed.list?"
 function getPets(search_params, res) {
 
 
-    let request_url = find_url + "&location="+ search_params.postal + "&breed=" + search_params.breed + "&size=" + search_params.size;
+    var request_url = find_url + "&location="+ search_params.postal + "&count=250";
 
+    if(search_params.breed) request_url += "&breed=" + search_params.breed;
+    if(search_params.size) request_url += "&size=" + search_params.size;
 
     let adopt_url = "https://www.petfinder.com/adoption-inquiry/";
 

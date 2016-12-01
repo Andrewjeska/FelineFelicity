@@ -1,7 +1,11 @@
 'use strict';
 
 import { Card, CardTitle, Pagination, Navbar, NavItem, Row, Col, Icon, Button } from 'react-materialize';
+import Spinner from 'react-spinner';
 import React from 'react';
+require('../styles/react-spinner.css');
+require('../styles/SearchResults.css');
+
 
 //actions
 var SearchResultsActions = require('../actions/SearchResultsActions')
@@ -41,7 +45,7 @@ class ResultsContainer extends React.Component {
             page_number: 0
         };
 
-        
+
         SearchResultsActions.searchForPets(this.state.params);
 
         this.renderPetCard = this.renderPetCard.bind(this)
@@ -66,7 +70,7 @@ class ResultsContainer extends React.Component {
     renderPetCard(page, start){
         var petCards = [];
         var len = this.state.pet_meta.length;
-        for(var i = (9 * page) + start ; i < ((9*page) + 9) && i < len ; i += 3){
+        for(var i = (9 * page) + start ; i < ((9 * page) + 9) && i < len ; i += 3){
             //3 results per col
             console.log(i);
             petCards.push(
@@ -86,9 +90,7 @@ class ResultsContainer extends React.Component {
     }
 
     render() {
-
-
-
+        //this.state.pet_meta[0]
         if(this.state.pet_meta[0]) {
 
             return(
@@ -111,29 +113,52 @@ class ResultsContainer extends React.Component {
                             }
                         </Col>
                     </Row>
+
                     <Row>
-                        <Col className="m5 s12"/>
+                        <Col className="m3"/>
 
-                        <Col className="m2 s12">
-                            <Pagination  items={this.state.pet_meta.length / 9 + 1}
-                            activePage={1}
-                            maxButtons={8}
-                            onSelect= {(i) => {
-                                SearchResultsActions.changePage(i - 1);
-                            }}
+                        <Col className="m6 s12">
+                            <div className="pages">
+                                <Pagination  items={Math.floor(this.state.pet_meta.length / 9 + 1)}
+                                activePage={1}
+                                maxButtons={8}
+                                onSelect= {(i) => {
+                                    SearchResultsActions.changePage(i - 1);
+                                }}
 
-                            />
+                                />
+                            </div>
+
                         </Col>
-                        <Col className="m5 s12"/>
+                        <Col className="m3"/>
 
                     </Row>
-
-
                 </div>
             )
-        }
+    }
 
-        return(null)
+
+
+    return(
+        <div>
+            <Row>
+
+                <Col className="m4 s12"/>
+
+                <Col className="m4 s12">
+                    <div className='spinnerDiv'>
+                        <Spinner/>
+                    </div>
+                </Col>
+
+                <Col className="m4 s12"/>
+
+            </Row>
+
+        </div>
+
+        )
+
     }
 }
 
@@ -147,11 +172,11 @@ class ResultsPage extends React.Component {
     /* our state should be the pets in our json */
     /* possibly the search params from get detections */
 
-
     render() {
+
         return(
             <div>
-                <Navbar brand='FelineFelicity' right>
+                <Navbar brand='HappyCat' right>
                     {/* need to drop down some menus here */}
                     <NavItem><Icon>search</Icon></NavItem>
 
@@ -159,6 +184,7 @@ class ResultsPage extends React.Component {
 
                 <div>
                     <ResultsContainer params={this.props.location.query}></ResultsContainer>
+
                 </div>
 
 
