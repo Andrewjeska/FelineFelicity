@@ -18,11 +18,11 @@ if(process.env.NODE_ENV !== 'production') {
   app.use(webpackHotMiddleware(compiler));
 }
 
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use('/dist', express.static(path.join(__dirname, 'dist')));
 
 
 app.get('*', function(request, response) {
-  response.sendFile(__dirname + '/dist/index.html')
+  response.sendFile(path.join(__dirname + '/index.html'))
 });
 
 app.use('/api', api );
