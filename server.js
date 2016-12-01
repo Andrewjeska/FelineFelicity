@@ -22,7 +22,7 @@ app.use('/dist', express.static(path.join(__dirname, 'dist')));
 
 
 app.get('*', function(request, response) {
-  response.sendFile('index.html')
+  response.sendFile(path.resolve(__dirname, 'index.html'))
 });
 
 app.use('/api', api );
