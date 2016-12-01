@@ -18,7 +18,7 @@ if(process.env.NODE_ENV !== 'production') {
   app.use(webpackHotMiddleware(compiler));
 }
 
-app.use('/dist', express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.resolve(__dirname, 'dist')));
 
 
 app.get('*', function(request, response) {
@@ -27,7 +27,7 @@ app.get('*', function(request, response) {
 
 app.use('/api', api );
 
-//
+
 app.listen(PORT, function(error) {
   if (error) {
     console.error(error);
