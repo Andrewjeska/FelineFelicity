@@ -1,0 +1,28 @@
+.react-spinner {
+  position: relative;
+  width: inherit;
+  height: inherit;
+}
+
+.spinnerDiv {
+    position: relative;
+    width: 30vh;
+    height: 30vh;
+    float: none;
+   margin: 0 auto;
+
+
+}
+
+.react-spinner_bar {
+    background-color:black;
+}
+
+.pages {
+    text-align: center;
+
+}
+
+.pagination {
+  display: inline-block;
+}

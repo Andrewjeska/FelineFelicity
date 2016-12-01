@@ -59,15 +59,7 @@ function handleUpload(image, res) {
 
 app.post('/search', (req, res) => {
 	var params = req.body;
-	if(!params.breed){
-		params.breed = "Domestic Short Hair";
-	}
-
-	if(!params.size){
-		params.size = "S";
-	}
-
-	console.log("Request:" + params);
+	console.log(params);
 	getPets(params, res);
 	//does this work?
 });
