@@ -41,8 +41,8 @@ class Intro extends React.Component {
 
                 <div className="box1">
                 <Navbar left>
-                  <NavItem href='about.html'>About</NavItem>
-                  <NavItem href='forShelters.html'>For Shelters</NavItem>
+                  {/*<NavItem href='about.html'>About</NavItem>
+                  <NavItem href='forShelters.html'>For Shelters</NavItem>*/}
 
                  {/* <Dropdown trigger={
                     <span>Account</span>
@@ -82,6 +82,7 @@ class Intro extends React.Component {
                             </div>
                         </Fade>
                     </Row>
+
                     <div className="cat"></div>
                 </div>
             </div>
@@ -212,7 +213,7 @@ class ImageSelection extends React.Component {
 
       const big_OR_col = {
           'paddingTop': '6%',
-          'paddingLeft': '5.5%'
+          'paddingLeft': '6.5%'
 
       };
 
@@ -254,13 +255,14 @@ class ImageSelection extends React.Component {
                 </Col>
               </Row>
 
+              <Row>
+                  <Link to="image-submit" smooth={true} duration={500} spy={true}>
+                      <div className="nextBox2-container">
+                          <Icon className="nextBox2">arrow_downward</Icon>
 
-              <Link to="image-submit" smooth={true} duration={500} spy={true}>
-                  <div className="nextBox2-container">
-                      <Icon className="nextBox2">arrow_downward</Icon>
-
-                  </div>
-              </Link>
+                      </div>
+                  </Link>
+            </Row>
           </div>
         </div>
 
