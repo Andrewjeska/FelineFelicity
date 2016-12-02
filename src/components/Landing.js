@@ -70,16 +70,18 @@ class Intro extends React.Component {
 
 
                     </div>
-                    <Fade duration={this.props.buttonDuration}>
+                    <Row>
+                        <Fade duration={this.props.buttonDuration}>
 
-                        <div className="nextBox-container">
+                            <div className="nextBox-container">
 
-                            <Link to="image-select" smooth={true} duration={500} spy={true}>
-                                <Icon className="nextBox">arrow_downward</Icon>
-                            </Link>
+                                <Link to="image-select" smooth={true} duration={500} spy={true}>
+                                    <Icon className="nextBox">arrow_downward</Icon>
+                                </Link>
 
-                        </div>
-                    </Fade>
+                            </div>
+                        </Fade>
+                    </Row>
                     <div className="cat"></div>
                 </div>
             </div>
