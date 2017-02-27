@@ -66,40 +66,6 @@ function getDetections(picture){
 
 }
 
-function getParams(detections){
-    /*
-
-    Looks at detections, returns object with the valid parameters.
-    In this future, this will probably include color.
-
-    */
-        let sizes = {
-            'Small To Medium Sized' : 'S',
-            'Medium To Large Sized' : 'M'
-        };
-
-        var breed = "";
-        var size = '';
-
-        for(var i = 0; i < detections.length; i++){
-            var breed_idx = breeds.indexOf(detections[i])
-
-            if(breed_idx > -1 && breed === "" )
-                //if detections has our breed and it hasn't been found yet
-                breed = breeds[breed_idx];
-
-            if(detections[i] in sizes && size === '')
-                //if detections has a size and it hasn't been found yet
-                size = sizes[detections[i]];
-
-
-        }
-
-
-        return {"breed": breed, "size": size} ;
-
-}
-
 
 
 function parseVisionData(detections) {
@@ -156,6 +122,40 @@ function parseVisionData(detections) {
         resolve(getParams(detections));
 
     })
+
+}
+
+function getParams(detections){
+    /*
+
+    Looks at detections, returns object with the valid parameters.
+    In this future, this will probably include color.
+
+    */
+        let sizes = {
+            'Small To Medium Sized' : 'S',
+            'Medium To Large Sized' : 'M'
+        };
+
+        var breed = "";
+        var size = '';
+
+        for(var i = 0; i < detections.length; i++){
+            var breed_idx = breeds.indexOf(detections[i])
+
+            if(breed_idx > -1 && breed === "" )
+                //if detections has our breed and it hasn't been found yet
+                breed = breeds[breed_idx];
+
+            if(detections[i] in sizes && size === '')
+                //if detections has a size and it hasn't been found yet
+                size = sizes[detections[i]];
+
+
+        }
+
+
+        return {"breed": breed, "size": size} ;
 
 }
 

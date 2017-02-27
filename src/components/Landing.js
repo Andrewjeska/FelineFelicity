@@ -35,58 +35,9 @@ class Intro extends React.Component {
     //needs a fancy fadein navbar. Should be have About For Shelters and on the right, log in.
     render() {
 
-        return (
-            <div>
-
-
-                <div className="box1">
-                <Navbar left>
-                  {/*<NavItem href='about.html'>About</NavItem>
-                  <NavItem href='forShelters.html'>For Shelters</NavItem>*/}
-
-                 {/* <Dropdown trigger={
-                    <span>Account</span>
-                  }>
-                  <NavItem>Pets</NavItem>
-                  <NavItem>Forms</NavItem>
-                  <NavItem divider />
-                  <NavItem>Settings</NavItem>
-                </Dropdown> */}
-
-                </Navbar>
-                    <div className="intro">
-                        <Row>
-                            <Fade duration={this.props.titleDuration}>
-                                <h1 className="title"> HappyCat </h1>
-                            </Fade>
-
-                            <Fade duration={this.props.subtitleDuration}>
-                                <p className="subtitle"> Welcome to HappyCat. A platform for finding pets that are up for adoption
-                                 in your area.
-                                </p>
-                            </Fade>
-                        </Row>
-
-
-
-                    </div>
-                    <Row>
-                        <Fade duration={this.props.buttonDuration}>
-
-                            <div className="nextBox-container">
-
-                                <Link to="image-select" smooth={true} duration={500} spy={true}>
-                                    <Icon className="nextBox">arrow_downward</Icon>
-                                </Link>
-
-                            </div>
-                        </Fade>
-                    </Row>
-
-                    <div className="cat"></div>
-                </div>
-            </div>
-        );
+        return ();
+            
+        
     }
 }
 
@@ -369,7 +320,7 @@ class SubmitImage extends React.Component {
                 <Col m={4} l={4}>
                     { this.state.params.postal  && <div>
                         <Link1 to={
-                            {   pathname: '/search',
+                            {   pathname: '/search
                                 query: {
                                     breed: this.state.params.breed,
                                     size: this.state.params.size,

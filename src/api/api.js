@@ -46,7 +46,7 @@ function handleUpload(image, res) {
 			} else {
 				parseVisionData(detections)
 					.then( (params) => {
-						//res.send(response from petfinder api), append isCat
+
 						res.send({
 							'isCat' : true,
 							'params': params
@@ -61,15 +61,8 @@ app.post('/search', (req, res) => {
 	var params = req.body;
 	console.log(params);
 	getPets(params, res);
-	//does this work?
+
 });
-
-
-//starting app
-//app.listen(process.env.API_PORT)
-//server.listen(process.env.PORT || config.port);
-
-//console.log(`API server started on port 3000`);
 
 
 
