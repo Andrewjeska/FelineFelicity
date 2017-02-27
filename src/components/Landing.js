@@ -191,19 +191,23 @@ class SubmitImage extends React.Component {
 
       return (
         <div>
+          <label>
+    Name:
+    <input type="text" name="name" />
+  </label>
   
-          <a  <Button > Submit </Button></a>
+          <a  <Button > Find Cats! </Button></a>
                       
-            <Link to={
-              {  pathname: '/search'
-                query: {
-                    breed: this.state.params.breed,
-                    size: this.state.params.size,
-                    postal: this.state.params.postal
-                }
+          <Link to={
+            {  pathname: '/search'
+              query: {
+                  breed: this.state.params.breed,
+                  size: this.state.params.size,
+                  postal: this.state.params.postal
+              }
 
-              }}>   
-            </Link>
+            }}>   
+          </Link>
               
         </div>
 

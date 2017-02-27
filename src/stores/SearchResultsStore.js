@@ -13,7 +13,6 @@ class SearchResultsStore {
       handleParamsChange: UploadActions.updateUploadBox,
       handlePageChange: SearchResultsActions.updatePageNumber,
       handlePetMetaChange: SearchResultsActions.updatePetMeta,
-      handleSubmitPostal: SearchResultsActions.updatePostal
     });
   }
 
@@ -36,13 +35,7 @@ class SearchResultsStore {
 
   }
 
-  handleSubmitPostal(postal){
-      this.params.postal = postal;
-      console.log(this.params);
 
-      //adds postal code to params
-
-  }
 
 }
 
