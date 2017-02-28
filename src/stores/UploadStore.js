@@ -1,21 +1,32 @@
 var alt = require('../alt');
 var UploadActions = require('../actions/UploadActions');
 
+/* UploadStore.js stores data about the upload field and the picture that was upload */
+
+//TODO: Should this store worry about file? What is file doing for us */
 
 class UploadStore {
   constructor() {
 
     this.isCat = false;
+    this.file = {};
+    this.canUpload = true;
+    this.params = {};
 
     this.bindListeners({
-      handleUploadedFile: UploadActions.updateUploadBox
+      handleFileStateChange: UploadActions.updateDropzone
     });
   }
 
-  handleUploadedFile(response) {
-    this.isCat = response.isCat
-    //will prevent image removal from dropzone
-
+  handleFileStateChange(response) {
+    /* handles file upload or removal */
+    this.isCat = response.params.isCat;
+    this.file = response.file;
+    this.canUpload = false;
+    this.params = { 
+                    'breed': response.params.breed, 
+                    'size': response.params.size
+                  }
   }
 }
 

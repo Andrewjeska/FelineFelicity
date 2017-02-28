@@ -2,25 +2,27 @@ var alt = require('../alt');
 var UploadSource = require('../sources/UploadSource');
 var Promise = require('bluebird');
 
+/* UploadActions.js provides actions for Landing.js to use as far as uploading
+files is concerned */
+
 class UploadActions {
-    updateUploadBox(response){
+    updateDropzone(response){
         return response;
 
     }
 
     uploadImage(file) {
         return (dispatch) => {
-        // we dispatch an event here so we can have "loading" state.
         dispatch();
 
 
         UploadSource.sendFile(file)
             .then((response) => {
-                // we can access other actions within our action through `this.actions`
+                this.updateDropzone({
+                                      'params':response,
+                                      'file':file
+                                    });
 
-                this.updateUploadBox(response);
-
-            //console.log(file);
           })
 
         }

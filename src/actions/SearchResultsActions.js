@@ -11,11 +11,6 @@ class SearchResultsActions {
         return pet_meta;
     }
 
-    updatePostal(postal){
-        return postal;
-    }
-
-
 
     changePage(page_number) {
         return (dispatch) => {
@@ -43,16 +38,6 @@ class SearchResultsActions {
         }
     }
 
-
-    submitPostal(postal) {
-        return (dispatch) => {
-        // we dispatch an event here so we can have "loading" state.
-            dispatch();
-
-            this.updatePostal(postal);
-
-        }
-    }
 
 }
 

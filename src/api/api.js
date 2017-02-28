@@ -49,7 +49,8 @@ function handleUpload(image, res) {
 
 						res.send({
 							'isCat' : true,
-							'params': params
+							'breed': params.breed,
+							'size': params.size
 						})
 				});
 			}
@@ -60,6 +61,7 @@ function handleUpload(image, res) {
 app.post('/search', (req, res) => {
 	var params = req.body;
 	console.log(params);
+	//TODO: get rid of callback
 	getPets(params, res);
 
 });

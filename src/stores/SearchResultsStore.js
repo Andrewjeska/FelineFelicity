@@ -10,15 +10,16 @@ class SearchResultsStore {
     this.page_number = 0;
 
     this.bindListeners({
-      handleParamsChange: UploadActions.updateUploadBox,
+      handleParamsChange: UploadActions.updateDropzone,
       handlePageChange: SearchResultsActions.updatePageNumber,
       handlePetMetaChange: SearchResultsActions.updatePetMeta,
     });
   }
 
   handleParamsChange(response) {
-    this.params = response.params;
-    //neccesary for search query
+    /* this will matter for when we do filtering */
+    this.params = {response.params;
+    //result of image upload (breed, size, and TODO: color)
 
   }
 
