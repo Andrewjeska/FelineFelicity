@@ -6,8 +6,8 @@ var Promise = require('bluebird');
 files is concerned */
 
 class UploadActions {
-    updateDropzone(response){
-        return response;
+    updateDropzone(response, removeFile){
+        return Object.assign(response, {canUpload: removeFile});
 
     }
 
@@ -19,9 +19,11 @@ class UploadActions {
         UploadSource.sendFile(file)
             .then((response) => {
                 this.updateDropzone({
-                                      'params':response,
+                                      'params':{breed: response.breed, size: response.size} ,
+                                      'isCat': response.isCat,
                                       'file':file
-                                    });
+                                      
+                                    }, false);
 
           })
 

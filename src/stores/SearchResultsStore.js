@@ -18,7 +18,7 @@ class SearchResultsStore {
 
   handleParamsChange(response) {
     /* this will matter for when we do filtering */
-    this.params = {response.params;
+    this.params = response.params;
     //result of image upload (breed, size, and TODO: color)
 
   }

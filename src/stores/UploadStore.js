@@ -9,9 +9,9 @@ class UploadStore {
   constructor() {
 
     this.isCat = false;
-    this.file = {};
+    this.file = null;
     this.canUpload = true;
-    this.params = {};
+    this.params = null;
 
     this.bindListeners({
       handleFileStateChange: UploadActions.updateDropzone
@@ -20,13 +20,11 @@ class UploadStore {
 
   handleFileStateChange(response) {
     /* handles file upload or removal */
-    this.isCat = response.params.isCat;
+   // console.log(response.isCat);
+    this.isCat = response.isCat;
     this.file = response.file;
-    this.canUpload = false;
-    this.params = { 
-                    'breed': response.params.breed, 
-                    'size': response.params.size
-                  }
+    this.canUpload = response.canUpload;
+    this.params = response.params;
   }
 }
 

@@ -5,7 +5,79 @@ body {
   border: 0;
   height:100%;
 
+ }
+
+ .landingDropzone {
+  	position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+ }
+
+ @media only screen and (min-width: 601px){
+ 	.landingContainer {
+ 		margin:64px;
+ 		height: 100%
+
+ 	}
+
+ }
+
+
+.uploadBox {
+    border-width: 2px;
+    border-style: dashed;
+    border-color: #008B8B;
+    background: #fafafa;
+    border-image: initial;
+    border-radius: 5px;
+    margin-top: 5% !important;
+
+    height: 250px !important;
+    width: 100%;
+    text-align: center;
+    display: table;
+
 }
 
+
+.uploadArrow {
+    font-size:80px;
+    vertical-align: middle;
+    display: table-cell;
+
+}
+
+.previewImage {
+	display: block;
+  position: relative;
+  width: 200px;
+  height: 200px;
+	overflow: hidden;
+  border-radius: 50%;
+
+  margin-bottom: 10%;
+
+    
+
+}
+
+.previewImage img {
+	max-height: 100%;
+	max-width: 100%;
+	vertical-align: middle;
+	
+	/* TODO: change css based on image, it's a little difficult*/
+}
+
+.closeModal {
+	position: absolute;
+	top: 0;
+	right: 0;
+	color: black;
+}
+ 
 
 
