@@ -8,22 +8,19 @@ const port = process.env.PORT;
 const UploadSource = {
     sendFile(file) {
             //console.log(file);
-            var data = new FormData();
-            data.append('file', file[0])
+      var data = new FormData();
+      data.append('file', file[0])
 
-            return new Promise( (resolve, reject) => {
-                fetch('/api/upload' , {
-                    method: 'POST',
-                    body: data
-                }).then( (response) => {
+      return new Promise( (resolve, reject) => {
+        fetch('/api/upload' , {
+          method: 'POST',
+          body: data
+        }).then( (response) => {
 
-                    resolve(response.json());
-                });
+          resolve(response.json());
+        });
 
-            });
-
-
-
+      });
 
     }
 };

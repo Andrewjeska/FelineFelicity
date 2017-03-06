@@ -1,6 +1,6 @@
 'use strict';
 
-import { Card, CardTitle, Pagination, Navbar, NavItem, Row, Col, Icon, Button } from 'react-materialize';
+import { Modal, Card, CardTitle, Pagination, Navbar, NavItem, Row, Col, Icon, Button } from 'react-materialize';
 import Spinner from 'react-spinner';
 import React from 'react';
 require('../styles/react-spinner.css');
@@ -46,7 +46,7 @@ class ResultsContainer extends React.Component {
         };
 
 
-        SearchResultsActions.searchForPets(this.state.params);
+        //SearchResultsActions.searchForPets(this.state.params);
 
         this.renderPetCard = this.renderPetCard.bind(this)
         this.onChange = this.onChange.bind(this)
@@ -90,24 +90,24 @@ class ResultsContainer extends React.Component {
     }
 
     render() {
-        //this.state.pet_meta[0]
+       
         if(this.state.pet_meta[0]) {
 
             return(
 
                 <div>
                     <Row>
-                        <Col className="m4 s12">
+                        <Col s={12} m={4}>
                             {
                                 this.renderPetCard(this.state.page_number, 0)
                             }
                         </Col>
-                        <Col className="m4 s12">
+                        <Col s={12} m={4}>
                             {
                                 this.renderPetCard(this.state.page_number, 1)
                             }
                         </Col>
-                        <Col className="m4 s12">
+                        <Col s={12} m={4}>
                             {
                                 this.renderPetCard(this.state.page_number, 2)
                             }
@@ -115,22 +115,22 @@ class ResultsContainer extends React.Component {
                     </Row>
 
                     <Row>
-                        <Col className="m3"/>
+                        <Col m={2} l={3}/>
 
-                        <Col className="m6 s12">
+                        <Col s={12} m={8} l={6}>
                             <div className="pages">
                                 <Pagination  items={Math.floor(this.state.pet_meta.length / 9 + 1)}
                                 activePage={1}
                                 maxButtons={8}
-                                onSelect= {(i) => {
-                                    SearchResultsActions.changePage(i - 1);
-                                }}
+                                onSelect= {
+                                    (i) => { SearchResultsActions.changePage(i - 1); }
+                                }
 
                                 />
                             </div>
 
                         </Col>
-                        <Col className="m3"/>
+                        <Col m={2} l={3}/>
 
                     </Row>
                 </div>
@@ -163,14 +163,58 @@ class ResultsContainer extends React.Component {
 }
 
 
-class AdvancedOptions extends React.Component {
-    /* changes search results, will requery our lamdba function */
-    /* initial state comes from the params from get detections */
+class FilteringPane extends React.Component {
+    /* will requery api on confirmation */
+   
+
+    constructor(props){
+        super(props);
+        this.state = {
+            params: this.props.params,
+            isOpen: false
+            
+        };
+
+        this.onChange = this.onChange.bind(this)
+
+    }
+
+    onChange(state){
+
+    }
+
+    componentDidMount() {
+      SearchResultsStore.listen(this.onChange);
+    }
+
+    componentWillUnmount() {
+      SearchResultsStore.unlisten(this.onChange);
+    }
+
+    openPane
+
+    render(){
+
+
+
+        return(
+
+
+        );
+    }
+
+
 }
 
 class ResultsPage extends React.Component {
     /* our state should be the pets in our json */
     /* possibly the search params from get detections */
+
+    constructor(props){
+        super(props);
+        SearchResultsActions.searchForPets(this.props.location.query);
+
+    }
 
     render() {
 
@@ -178,12 +222,15 @@ class ResultsPage extends React.Component {
             <div>
                 <Navbar brand='HappyCat' right>
                     {/* need to drop down some menus here */}
-                    <NavItem><Icon>search</Icon></NavItem>
+                   
+                    
 
                 </Navbar>
 
                 <div>
-                    <ResultsContainer params={this.props.location.query}></ResultsContainer>
+                    <ResultsContainer params={this.props.location.query}>
+
+                    </ResultsContainer>
 
                 </div>
 

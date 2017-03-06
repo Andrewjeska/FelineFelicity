@@ -6,7 +6,7 @@ This is the landing page of the website. It is for the user to upload a cat imag
 In the future, this will include an "About" page, "For Shelters" page, and probably a login button */
 
 require('normalize.css/normalize.css');
-require('../styles/Landing.css');
+require('../styles/Landing.scss');
 require('../styles/cat_animation.scss');
 
 import React from 'react';
@@ -59,6 +59,7 @@ class Intro extends React.Component {
           <Row>
             <Col m={2} l={2}/>
             <Col className="logo" m={3} l={3}>
+              Logo
             </Col>
             <Col className="blurb" m={5} l={5}>
               Tinder for Cats!
@@ -75,7 +76,7 @@ class Intro extends React.Component {
 
 class Upload extends React.Component {
 
-    /* Upload componenent generates the dropzone, and anything related to image upload for this page */
+    /* Upload component generates the dropzone, and anything related to image upload for this page */
     
 
     constructor() {
@@ -87,7 +88,9 @@ class Upload extends React.Component {
       };
       this.onChange = this.onChange.bind(this)
       //this.createPreview = this.createPreview.bind(this)
-      this.handleImageRemove = this.handleImageRemove.bind(this)
+     
+
+      
 
     }
 
@@ -100,23 +103,31 @@ class Upload extends React.Component {
     }
 
 
+    shouldComponentUpdate(nextProps, nextState){
+
+      if(nextState.isCat === false){
+         Materialize.toast("This does not look like a cat!", 2000)
+         return false
+      } 
+
+      else return true;
+
+    }
+
+
      componentDidUpdate(){
-         if(!this.state.canUpload) {
-             $(".uploadBox input").prop("disabled", true)
-             $(".uploadBox").css("cursor", "default")
+        console.log('upload componnent updated');
 
-         } else {
-             $(".uploadBox input").prop("disabled", false)
-             $(".uploadBox").css("cursor", "pointer")
-         }
+        if(this.state.canUpload) {
 
-         if(this.state.isCat !== null){
-            if(this.state.file && !this.state.isCat) {
-                console.log("not a cat")
-                Materialize.toast("This does not look like a cat!", 2000)
-                this.handleImageRemove();
-            }
-         }
+          $(".uploadBox input").prop("disabled", false)
+          $(".uploadBox").css("cursor", "pointer")
+
+        } else {
+
+          $(".uploadBox input").prop("disabled", true)
+          $(".uploadBox").css("cursor", "default")
+        }
     }
 
     onChange(state) {
@@ -125,17 +136,7 @@ class Upload extends React.Component {
                       isCat: state.isCat,
                       canUpload: state.canUpload
                     });
-      console.log('upload componenent updated');
     }
-
-    handleImageRemove(){
-        UploadActions.updateDropzone({
-                        file: null,
-                        isCat: null,
-                        params: null,
-                      }, true);
-      }
-
 
     /*createPreview(){
 
@@ -166,11 +167,11 @@ class Upload extends React.Component {
                 <Col m={8} l={8}>
 
                   <div >
-                    <Dropzone className="uploadBox" maxSize={4000000} multiple={false}  onDrop= {
+                    <Dropzone style={{'cursor':'pointer'}}className="uploadBox" maxSize={4000000} multiple={false}  onDrop= {
                         (acceptedFile) => {
                             UploadActions.uploadImage(acceptedFile)
                             
-                            //A flux action that sends the image to the api, and triggers the upload componenent to render the preview
+                            //A flux action that sends the image to the api, and triggers the upload componnent to render the preview
                         }
                    }>
                     <Icon className="uploadArrow">cloud_upload</Icon>
@@ -196,19 +197,32 @@ class Upload extends React.Component {
     }
 }
 
-class catGallery extends React.Component {
+class CatGallery extends React.Component {
   /* renders gallery that holds a few sample cat pictures */
 
   render() {
+   
+
+    const images = [
+      {
+        original: 'https://s3.amazonaws.com/felinefelicity/birman.jpg',
+        thumbnail: 'https://s3.amazonaws.com/felinefelicity/birman.jpg',
+      },
+      {
+        original: 'https://s3.amazonaws.com/felinefelicity/persian.jpg',
+        thumbnail: 'https://s3.amazonaws.com/felinefelicity/persian.jpg'
+      }
+    ]
+
     return(
       <div>
         <Row>
-          <Col m={2} l={l}/>
+          <Col m={2} l={2}/>
           <Col className="gallery" m={8} l={8}>
-            {/* materialize image gallery or something */}
+              
 
           </Col>
-          <Col m={2} l={l}/>
+          <Col m={2} l={2}/>
         </Row>
       </div>
 
@@ -229,6 +243,7 @@ class SubmitModal extends React.Component {
       this.state = {
 
         file: null,
+        isCat: null,
 
 
         params:{ 
@@ -236,7 +251,7 @@ class SubmitModal extends React.Component {
           size:null
         },
 
-        postal:"",
+        postal:""
          
 
       }
@@ -258,35 +273,46 @@ class SubmitModal extends React.Component {
     onChange(state){
 
         this.setState({
-            params: state.params,
             file: state.file,
+            isCat: state.isCat,
+            params: state.params
+            
         });
 
-        console.log('modal updated')
+       
 
 
     }
 
+     shouldComponentUpdate(nextProps, nextState){
+      
+      if(nextState.isCat === false) return false
+      if(nextState.postal.length < 5 && nextState.postal.length > 0) return false
+      else return true;
+       
+  
+    }
+
 
     componentDidUpdate(){
-      if(this.state.file) $("#modalButton").click()
+      console.log('modal updated')
+      if(this.state.isCat) $("#modalButton").click()
      
         
-
-      //TODO: Avoid doing this, need to find the actual method to call within library
+      // very bad practice
+      // TODO: Avoid doing this, need to find the actual method to call within library
       // Will probably have to edit source code
      
     }
 
 
     closeModal(){
-      console.log("called")
-
       UploadActions.updateDropzone({
                         file: null,
                         isCat: null,
                         params: null
-                      }, true);
+                      }, true); 
+     
 
     }
 
@@ -309,19 +335,33 @@ class SubmitModal extends React.Component {
         <div>
           <Modal 
             ref="myModal"
-            header="Submit Image"
+           
             trigger= {
               <button id="modalButton" style={modalButton}></button>
             }
             actions = {[
-              <Button waves='light' modal='close' flat onClick={this.closeModal}>Close</Button>
+              <Button waves='light' modal='close' flat onClick={this.closeModal}>Close</Button>,
+              <Link to= {
+                          {  
+                            pathname: '/search',
+                            query: {
+                              breed: this.state.params.breed,
+                              size: this.state.params.size,
+                              postal: this.state.postal
+                            }
+                          }
+                       }> 
+
+                      <Button  waves='light' modal='close' flat disabled={this.state.postal.length < 5}> Find Cats! </Button>
+              </Link>
+
             ]}
             
 
           >
           
             {
-              this.state.file ? 
+              this.state.isCat ? 
 
               <div>
 
@@ -335,35 +375,19 @@ class SubmitModal extends React.Component {
                   
                   </Col>
                   <Col m={4} l={4}/>
-                
-      
                 </Row>
 
-                
-                <Input placeholder="Postal Code" label="Postal Code" onChange={this.updatePostal}/>
-
-                <div>
-                  {/* This div renders the button*/}
+               
                   
-                    <Link to= {
-                                {  
-                                  pathname: '/search',
-                                  query: {
-                                    breed: this.state.params.breed,
-                                    size: this.state.params.size,
-                                    postal: this.state.postal
-                                  }
+                <Row>
+                  <Col m={2} l={2}/>
 
-                                }
-                             }> 
-                        <Button disabled={this.state.postal.length < 5}> Find Cats! </Button>
-                      </Link>
-                   
-                    
-                  
-                
-                </div>
+                  <Input m={8} l={8} style={{}} placeholder="Postal Code" onChange={this.updatePostal}/>'                  
+                  {/* TODO: How to trigger on press enter button?*/}
 
+                  <Col m={2} l={2}/>
+                </Row>
+              
               </div> : null
 
             }
@@ -408,13 +432,14 @@ class Landing extends React.Component {
                         (acceptedFile) => {
                             UploadActions.uploadImage(acceptedFile)
                             
-                            //A flux action that sends the image to the api, and triggers the upload componenent to render the preview
+                            //A flux action that sends the image to the api, and triggers the upload component to render the preview
                         }
             }>
 
               <div className="landingContainer">
                 <Intro />
                 <Upload />
+               
                 <SubmitModal />
 
               </div>
