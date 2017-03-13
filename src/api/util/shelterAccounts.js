@@ -8,9 +8,9 @@ var routes = require('express')();
 
 
 routes.post('/register', (req, res) => {
-	Shelter.register(new Shelter({name: req.body.name, city: req.body.city, state: req.body.state postal: req.body.postal, username: req.body.username}), req.body.password, (err) => {
+	Shelter.register(new Shelter({name: req.body.name, city: req.body.city, state: req.body.state, postal: req.body.postal, username: req.body.username}), req.body.password, (err) => {
 		if (err) {
-			
+			console.log(err)
       return res.send(err);
     }
 
@@ -18,6 +18,7 @@ routes.post('/register', (req, res) => {
 
     passport.authenticate('local')(req, res, function () {
       res.redirect('/');
+      //redirect to dashboard
       //else we just send a positive response if this doesn't work
     });
 
@@ -27,7 +28,8 @@ routes.post('/register', (req, res) => {
 });
 
 routes.post('/login', passport.authenticate('local'), (req, res) => {
-	res.send('logged in')
+	res.redirect('/');
+	//redirect to dashboard
 });
 
 

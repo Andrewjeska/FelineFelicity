@@ -286,7 +286,8 @@ class SubmitModal extends React.Component {
       
       if(nextState.isCat === false) return false
       if(nextState.postal.length < 5 && nextState.postal.length > 0) return false
-      else return true;
+      
+      return true;
        
   
     }
