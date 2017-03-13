@@ -29,7 +29,6 @@ class SearchResultsActions {
             SearchSource.searchForPets(params)
                 .then((response) => {
 
-
                     this.updatePetMeta(response);
 
 

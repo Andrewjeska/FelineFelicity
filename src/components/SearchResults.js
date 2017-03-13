@@ -191,13 +191,13 @@ class FilteringPane extends React.Component {
       SearchResultsStore.unlisten(this.onChange);
     }
 
-    openPane
+    
 
     render(){
 
 
 
-        return(
+        return(<div></div>
 
 
         );

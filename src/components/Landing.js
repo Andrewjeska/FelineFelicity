@@ -88,9 +88,7 @@ class Upload extends React.Component {
       };
       this.onChange = this.onChange.bind(this)
       //this.createPreview = this.createPreview.bind(this)
-     
-
-      
+       
 
     }
 
